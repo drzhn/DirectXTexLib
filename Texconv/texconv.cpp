@@ -70,6 +70,8 @@ using namespace DirectX;
 using namespace DirectX::PackedVector;
 using Microsoft::WRL::ComPtr;
 
+#include "Texconv.h"
+
 namespace
 {
     enum OPTIONS : uint64_t
@@ -1382,11 +1384,14 @@ namespace
 //--------------------------------------------------------------------------------------
 // Entry-point
 //--------------------------------------------------------------------------------------
-#ifdef _PREFAST_
-#pragma prefast(disable : 28198, "Command-line tool, frees all memory on exit")
-#endif
+//#ifdef _PREFAST_
+//#pragma prefast(disable : 28198, "Command-line tool, frees all memory on exit")
+//#endif
 
-int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
+namespace TextureConversion
+{
+
+int convert()
 {
     // Parameters and defaults
     size_t width = 0;
@@ -1433,571 +1438,570 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
     // Process command line
     uint64_t dwOptions = 0;
     std::list<SConversion> conversion;
-    bool allowOpts = true;
+    //bool allowOpts = true;
+    //for (int iArg = 1; iArg < argc; iArg++)
+    //{
+    //    PWSTR pArg = argv[iArg];
 
-    for (int iArg = 1; iArg < argc; iArg++)
-    {
-        PWSTR pArg = argv[iArg];
+    //    if (allowOpts
+    //        && ('-' == pArg[0]) && ('-' == pArg[1]))
+    //    {
+    //        if (pArg[2] == 0)
+    //        {
+    //            // "-- " is the POSIX standard for "end of options" marking to escape the '-' and '/' characters at the start of filepaths.
+    //            allowOpts = false;
+    //        }
+    //        else if (!_wcsicmp(pArg,L"--version"))
+    //        {
+    //            PrintLogo(true);
+    //            return 0;
+    //        }
+    //        else if (!_wcsicmp(pArg, L"--help"))
+    //        {
+    //            PrintUsage();
+    //            return 0;
+    //        }
+    //        else
+    //        {
+    //            wprintf(L"Unknown option: %ls\n", pArg);
+    //            return 1;
+    //        }
+    //    }
+    //    else if (allowOpts
+    //        && (('-' == pArg[0]) || ('/' == pArg[0])))
+    //    {
+    //        pArg++;
+    //        PWSTR pValue;
 
-        if (allowOpts
-            && ('-' == pArg[0]) && ('-' == pArg[1]))
-        {
-            if (pArg[2] == 0)
-            {
-                // "-- " is the POSIX standard for "end of options" marking to escape the '-' and '/' characters at the start of filepaths.
-                allowOpts = false;
-            }
-            else if (!_wcsicmp(pArg,L"--version"))
-            {
-                PrintLogo(true);
-                return 0;
-            }
-            else if (!_wcsicmp(pArg, L"--help"))
-            {
-                PrintUsage();
-                return 0;
-            }
-            else
-            {
-                wprintf(L"Unknown option: %ls\n", pArg);
-                return 1;
-            }
-        }
-        else if (allowOpts
-            && (('-' == pArg[0]) || ('/' == pArg[0])))
-        {
-            pArg++;
-            PWSTR pValue;
+    //        for (pValue = pArg; *pValue && (':' != *pValue); pValue++);
 
-            for (pValue = pArg; *pValue && (':' != *pValue); pValue++);
+    //        if (*pValue)
+    //            *pValue++ = 0;
 
-            if (*pValue)
-                *pValue++ = 0;
+    //        const uint64_t dwOption = LookupByName(pArg, g_pOptions);
 
-            const uint64_t dwOption = LookupByName(pArg, g_pOptions);
+    //        if (!dwOption || (dwOptions & (uint64_t(1) << dwOption)))
+    //        {
+    //            PrintUsage();
+    //            return 1;
+    //        }
 
-            if (!dwOption || (dwOptions & (uint64_t(1) << dwOption)))
-            {
-                PrintUsage();
-                return 1;
-            }
+    //        dwOptions |= (uint64_t(1) << dwOption);
 
-            dwOptions |= (uint64_t(1) << dwOption);
+    //        // Handle options with additional value parameter
+    //        switch (dwOption)
+    //        {
+    //        case OPT_WIDTH:
+    //        case OPT_HEIGHT:
+    //        case OPT_MIPLEVELS:
+    //        case OPT_FORMAT:
+    //        case OPT_FILTER:
+    //        case OPT_PREFIX:
+    //        case OPT_SUFFIX:
+    //        case OPT_OUTPUTDIR:
+    //        case OPT_FILETYPE:
+    //        case OPT_GPU:
+    //        case OPT_FEATURE_LEVEL:
+    //        case OPT_ALPHA_THRESHOLD:
+    //        case OPT_ALPHA_WEIGHT:
+    //        case OPT_NORMAL_MAP:
+    //        case OPT_NORMAL_MAP_AMPLITUDE:
+    //        case OPT_WIC_QUALITY:
+    //        case OPT_BC_COMPRESS:
+    //        case OPT_COLORKEY:
+    //        case OPT_FILELIST:
+    //        case OPT_ROTATE_COLOR:
+    //        case OPT_PAPER_WHITE_NITS:
+    //        case OPT_PRESERVE_ALPHA_COVERAGE:
+    //        case OPT_SWIZZLE:
+    //            // These support either "-arg:value" or "-arg value"
+    //            if (!*pValue)
+    //            {
+    //                if ((iArg + 1 >= argc))
+    //                {
+    //                    PrintUsage();
+    //                    return 1;
+    //                }
 
-            // Handle options with additional value parameter
-            switch (dwOption)
-            {
-            case OPT_WIDTH:
-            case OPT_HEIGHT:
-            case OPT_MIPLEVELS:
-            case OPT_FORMAT:
-            case OPT_FILTER:
-            case OPT_PREFIX:
-            case OPT_SUFFIX:
-            case OPT_OUTPUTDIR:
-            case OPT_FILETYPE:
-            case OPT_GPU:
-            case OPT_FEATURE_LEVEL:
-            case OPT_ALPHA_THRESHOLD:
-            case OPT_ALPHA_WEIGHT:
-            case OPT_NORMAL_MAP:
-            case OPT_NORMAL_MAP_AMPLITUDE:
-            case OPT_WIC_QUALITY:
-            case OPT_BC_COMPRESS:
-            case OPT_COLORKEY:
-            case OPT_FILELIST:
-            case OPT_ROTATE_COLOR:
-            case OPT_PAPER_WHITE_NITS:
-            case OPT_PRESERVE_ALPHA_COVERAGE:
-            case OPT_SWIZZLE:
-                // These support either "-arg:value" or "-arg value"
-                if (!*pValue)
-                {
-                    if ((iArg + 1 >= argc))
-                    {
-                        PrintUsage();
-                        return 1;
-                    }
+    //                iArg++;
+    //                pValue = argv[iArg];
+    //            }
+    //            break;
+    //        }
 
-                    iArg++;
-                    pValue = argv[iArg];
-                }
-                break;
-            }
+    //        switch (dwOption)
+    //        {
+    //        case OPT_WIDTH:
+    //            if (swscanf_s(pValue, L"%zu", &width) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -w (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            switch (dwOption)
-            {
-            case OPT_WIDTH:
-                if (swscanf_s(pValue, L"%zu", &width) != 1)
-                {
-                    wprintf(L"Invalid value specified with -w (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_HEIGHT:
+    //            if (swscanf_s(pValue, L"%zu", &height) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -h (%ls)\n", pValue);
+    //                printf("\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_HEIGHT:
-                if (swscanf_s(pValue, L"%zu", &height) != 1)
-                {
-                    wprintf(L"Invalid value specified with -h (%ls)\n", pValue);
-                    printf("\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_MIPLEVELS:
+    //            if (swscanf_s(pValue, L"%zu", &mipLevels) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -m (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_MIPLEVELS:
-                if (swscanf_s(pValue, L"%zu", &mipLevels) != 1)
-                {
-                    wprintf(L"Invalid value specified with -m (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_FORMAT:
+    //            format = static_cast<DXGI_FORMAT>(LookupByName(pValue, g_pFormats));
+    //            if (!format)
+    //            {
+    //                format = static_cast<DXGI_FORMAT>(LookupByName(pValue, g_pFormatAliases));
+    //                if (!format)
+    //                {
+    //                    wprintf(L"Invalid value specified with -f (%ls)\n", pValue);
+    //                    wprintf(L"\n");
+    //                    PrintUsage();
+    //                    return 1;
+    //                }
+    //            }
+    //            break;
 
-            case OPT_FORMAT:
-                format = static_cast<DXGI_FORMAT>(LookupByName(pValue, g_pFormats));
-                if (!format)
-                {
-                    format = static_cast<DXGI_FORMAT>(LookupByName(pValue, g_pFormatAliases));
-                    if (!format)
-                    {
-                        wprintf(L"Invalid value specified with -f (%ls)\n", pValue);
-                        wprintf(L"\n");
-                        PrintUsage();
-                        return 1;
-                    }
-                }
-                break;
+    //        case OPT_FILTER:
+    //            dwFilter = static_cast<TEX_FILTER_FLAGS>(LookupByName(pValue, g_pFilters));
+    //            if (!dwFilter)
+    //            {
+    //                wprintf(L"Invalid value specified with -if (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_FILTER:
-                dwFilter = static_cast<TEX_FILTER_FLAGS>(LookupByName(pValue, g_pFilters));
-                if (!dwFilter)
-                {
-                    wprintf(L"Invalid value specified with -if (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_ROTATE_COLOR:
+    //            dwRotateColor = LookupByName(pValue, g_pRotateColor);
+    //            if (!dwRotateColor)
+    //            {
+    //                wprintf(L"Invalid value specified with -rotatecolor (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_ROTATE_COLOR:
-                dwRotateColor = LookupByName(pValue, g_pRotateColor);
-                if (!dwRotateColor)
-                {
-                    wprintf(L"Invalid value specified with -rotatecolor (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_SRGBI:
+    //            dwSRGB |= TEX_FILTER_SRGB_IN;
+    //            break;
 
-            case OPT_SRGBI:
-                dwSRGB |= TEX_FILTER_SRGB_IN;
-                break;
+    //        case OPT_SRGBO:
+    //            dwSRGB |= TEX_FILTER_SRGB_OUT;
+    //            break;
 
-            case OPT_SRGBO:
-                dwSRGB |= TEX_FILTER_SRGB_OUT;
-                break;
+    //        case OPT_SRGB:
+    //            dwSRGB |= TEX_FILTER_SRGB;
+    //            break;
 
-            case OPT_SRGB:
-                dwSRGB |= TEX_FILTER_SRGB;
-                break;
+    //        case OPT_SEPALPHA:
+    //            dwFilterOpts |= TEX_FILTER_SEPARATE_ALPHA;
+    //            break;
 
-            case OPT_SEPALPHA:
-                dwFilterOpts |= TEX_FILTER_SEPARATE_ALPHA;
-                break;
+    //        case OPT_NO_WIC:
+    //            dwFilterOpts |= TEX_FILTER_FORCE_NON_WIC;
+    //            break;
 
-            case OPT_NO_WIC:
-                dwFilterOpts |= TEX_FILTER_FORCE_NON_WIC;
-                break;
+    //        case OPT_PREFIX:
+    //            wcscpy_s(szPrefix, MAX_PATH, pValue);
+    //            break;
 
-            case OPT_PREFIX:
-                wcscpy_s(szPrefix, MAX_PATH, pValue);
-                break;
+    //        case OPT_SUFFIX:
+    //            wcscpy_s(szSuffix, MAX_PATH, pValue);
+    //            break;
 
-            case OPT_SUFFIX:
-                wcscpy_s(szSuffix, MAX_PATH, pValue);
-                break;
+    //        case OPT_OUTPUTDIR:
+    //            {
+    //                std::filesystem::path path(pValue);
+    //                wcscpy_s(szOutputDir, path.make_preferred().c_str());
+    //            }
+    //            break;
 
-            case OPT_OUTPUTDIR:
-                {
-                    std::filesystem::path path(pValue);
-                    wcscpy_s(szOutputDir, path.make_preferred().c_str());
-                }
-                break;
+    //        case OPT_FILETYPE:
+    //            FileType = LookupByName(pValue, g_pSaveFileTypes);
+    //            if (!FileType)
+    //            {
+    //                wprintf(L"Invalid value specified with -ft (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_FILETYPE:
-                FileType = LookupByName(pValue, g_pSaveFileTypes);
-                if (!FileType)
-                {
-                    wprintf(L"Invalid value specified with -ft (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_PREMUL_ALPHA:
+    //            if (dwOptions & (uint64_t(1) << OPT_DEMUL_ALPHA))
+    //            {
+    //                wprintf(L"Can't use -pmalpha and -alpha at same time\n\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_PREMUL_ALPHA:
-                if (dwOptions & (uint64_t(1) << OPT_DEMUL_ALPHA))
-                {
-                    wprintf(L"Can't use -pmalpha and -alpha at same time\n\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_DEMUL_ALPHA:
+    //            if (dwOptions & (uint64_t(1) << OPT_PREMUL_ALPHA))
+    //            {
+    //                wprintf(L"Can't use -pmalpha and -alpha at same time\n\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_DEMUL_ALPHA:
-                if (dwOptions & (uint64_t(1) << OPT_PREMUL_ALPHA))
-                {
-                    wprintf(L"Can't use -pmalpha and -alpha at same time\n\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_TA_WRAP:
+    //            if (dwFilterOpts & TEX_FILTER_MIRROR)
+    //            {
+    //                wprintf(L"Can't use -wrap and -mirror at same time\n\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            dwFilterOpts |= TEX_FILTER_WRAP;
+    //            break;
 
-            case OPT_TA_WRAP:
-                if (dwFilterOpts & TEX_FILTER_MIRROR)
-                {
-                    wprintf(L"Can't use -wrap and -mirror at same time\n\n");
-                    PrintUsage();
-                    return 1;
-                }
-                dwFilterOpts |= TEX_FILTER_WRAP;
-                break;
+    //        case OPT_TA_MIRROR:
+    //            if (dwFilterOpts & TEX_FILTER_WRAP)
+    //            {
+    //                wprintf(L"Can't use -wrap and -mirror at same time\n\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            dwFilterOpts |= TEX_FILTER_MIRROR;
+    //            break;
 
-            case OPT_TA_MIRROR:
-                if (dwFilterOpts & TEX_FILTER_WRAP)
-                {
-                    wprintf(L"Can't use -wrap and -mirror at same time\n\n");
-                    PrintUsage();
-                    return 1;
-                }
-                dwFilterOpts |= TEX_FILTER_MIRROR;
-                break;
+    //        case OPT_NORMAL_MAP:
+    //            {
+    //                dwNormalMap = CNMAP_DEFAULT;
 
-            case OPT_NORMAL_MAP:
-                {
-                    dwNormalMap = CNMAP_DEFAULT;
+    //                if (wcschr(pValue, L'l'))
+    //                {
+    //                    dwNormalMap |= CNMAP_CHANNEL_LUMINANCE;
+    //                }
+    //                else if (wcschr(pValue, L'r'))
+    //                {
+    //                    dwNormalMap |= CNMAP_CHANNEL_RED;
+    //                }
+    //                else if (wcschr(pValue, L'g'))
+    //                {
+    //                    dwNormalMap |= CNMAP_CHANNEL_GREEN;
+    //                }
+    //                else if (wcschr(pValue, L'b'))
+    //                {
+    //                    dwNormalMap |= CNMAP_CHANNEL_BLUE;
+    //                }
+    //                else if (wcschr(pValue, L'a'))
+    //                {
+    //                    dwNormalMap |= CNMAP_CHANNEL_ALPHA;
+    //                }
+    //                else
+    //                {
+    //                    wprintf(L"Invalid value specified for -nmap (%ls), missing l, r, g, b, or a\n\n", pValue);
+    //                    return 1;
+    //                }
 
-                    if (wcschr(pValue, L'l'))
-                    {
-                        dwNormalMap |= CNMAP_CHANNEL_LUMINANCE;
-                    }
-                    else if (wcschr(pValue, L'r'))
-                    {
-                        dwNormalMap |= CNMAP_CHANNEL_RED;
-                    }
-                    else if (wcschr(pValue, L'g'))
-                    {
-                        dwNormalMap |= CNMAP_CHANNEL_GREEN;
-                    }
-                    else if (wcschr(pValue, L'b'))
-                    {
-                        dwNormalMap |= CNMAP_CHANNEL_BLUE;
-                    }
-                    else if (wcschr(pValue, L'a'))
-                    {
-                        dwNormalMap |= CNMAP_CHANNEL_ALPHA;
-                    }
-                    else
-                    {
-                        wprintf(L"Invalid value specified for -nmap (%ls), missing l, r, g, b, or a\n\n", pValue);
-                        return 1;
-                    }
+    //                if (wcschr(pValue, L'm'))
+    //                {
+    //                    dwNormalMap |= CNMAP_MIRROR;
+    //                }
+    //                else
+    //                {
+    //                    if (wcschr(pValue, L'u'))
+    //                    {
+    //                        dwNormalMap |= CNMAP_MIRROR_U;
+    //                    }
+    //                    if (wcschr(pValue, L'v'))
+    //                    {
+    //                        dwNormalMap |= CNMAP_MIRROR_V;
+    //                    }
+    //                }
 
-                    if (wcschr(pValue, L'm'))
-                    {
-                        dwNormalMap |= CNMAP_MIRROR;
-                    }
-                    else
-                    {
-                        if (wcschr(pValue, L'u'))
-                        {
-                            dwNormalMap |= CNMAP_MIRROR_U;
-                        }
-                        if (wcschr(pValue, L'v'))
-                        {
-                            dwNormalMap |= CNMAP_MIRROR_V;
-                        }
-                    }
+    //                if (wcschr(pValue, L'i'))
+    //                {
+    //                    dwNormalMap |= CNMAP_INVERT_SIGN;
+    //                }
 
-                    if (wcschr(pValue, L'i'))
-                    {
-                        dwNormalMap |= CNMAP_INVERT_SIGN;
-                    }
+    //                if (wcschr(pValue, L'o'))
+    //                {
+    //                    dwNormalMap |= CNMAP_COMPUTE_OCCLUSION;
+    //                }
+    //            }
+    //            break;
 
-                    if (wcschr(pValue, L'o'))
-                    {
-                        dwNormalMap |= CNMAP_COMPUTE_OCCLUSION;
-                    }
-                }
-                break;
+    //        case OPT_NORMAL_MAP_AMPLITUDE:
+    //            if (!dwNormalMap)
+    //            {
+    //                wprintf(L"-nmapamp requires -nmap\n\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (swscanf_s(pValue, L"%f", &nmapAmplitude) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -nmapamp (%ls)\n\n", pValue);
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (nmapAmplitude < 0.f)
+    //            {
+    //                wprintf(L"Normal map amplitude must be positive (%ls)\n\n", pValue);
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_NORMAL_MAP_AMPLITUDE:
-                if (!dwNormalMap)
-                {
-                    wprintf(L"-nmapamp requires -nmap\n\n");
-                    PrintUsage();
-                    return 1;
-                }
-                else if (swscanf_s(pValue, L"%f", &nmapAmplitude) != 1)
-                {
-                    wprintf(L"Invalid value specified with -nmapamp (%ls)\n\n", pValue);
-                    PrintUsage();
-                    return 1;
-                }
-                else if (nmapAmplitude < 0.f)
-                {
-                    wprintf(L"Normal map amplitude must be positive (%ls)\n\n", pValue);
-                    return 1;
-                }
-                break;
+    //        case OPT_GPU:
+    //            if (swscanf_s(pValue, L"%d", &adapter) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -gpu (%ls)\n\n", pValue);
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (adapter < 0)
+    //            {
+    //                wprintf(L"Invalid adapter index (%ls)\n\n", pValue);
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_GPU:
-                if (swscanf_s(pValue, L"%d", &adapter) != 1)
-                {
-                    wprintf(L"Invalid value specified with -gpu (%ls)\n\n", pValue);
-                    PrintUsage();
-                    return 1;
-                }
-                else if (adapter < 0)
-                {
-                    wprintf(L"Invalid adapter index (%ls)\n\n", pValue);
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_FEATURE_LEVEL:
+    //            maxSize = LookupByName(pValue, g_pFeatureLevels);
+    //            if (!maxSize)
+    //            {
+    //                wprintf(L"Invalid value specified with -fl (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_FEATURE_LEVEL:
-                maxSize = LookupByName(pValue, g_pFeatureLevels);
-                if (!maxSize)
-                {
-                    wprintf(L"Invalid value specified with -fl (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_ALPHA_THRESHOLD:
+    //            if (swscanf_s(pValue, L"%f", &alphaThreshold) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -at (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (alphaThreshold < 0.f)
+    //            {
+    //                wprintf(L"-at (%ls) parameter must be positive\n", pValue);
+    //                wprintf(L"\n");
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_ALPHA_THRESHOLD:
-                if (swscanf_s(pValue, L"%f", &alphaThreshold) != 1)
-                {
-                    wprintf(L"Invalid value specified with -at (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                else if (alphaThreshold < 0.f)
-                {
-                    wprintf(L"-at (%ls) parameter must be positive\n", pValue);
-                    wprintf(L"\n");
-                    return 1;
-                }
-                break;
+    //        case OPT_ALPHA_WEIGHT:
+    //            if (swscanf_s(pValue, L"%f", &alphaWeight) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -aw (%ls)\n", pValue);
+    //                wprintf(L"\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (alphaWeight < 0.f)
+    //            {
+    //                wprintf(L"-aw (%ls) parameter must be positive\n", pValue);
+    //                wprintf(L"\n");
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_ALPHA_WEIGHT:
-                if (swscanf_s(pValue, L"%f", &alphaWeight) != 1)
-                {
-                    wprintf(L"Invalid value specified with -aw (%ls)\n", pValue);
-                    wprintf(L"\n");
-                    PrintUsage();
-                    return 1;
-                }
-                else if (alphaWeight < 0.f)
-                {
-                    wprintf(L"-aw (%ls) parameter must be positive\n", pValue);
-                    wprintf(L"\n");
-                    return 1;
-                }
-                break;
+    //        case OPT_BC_COMPRESS:
+    //            {
+    //                dwCompress = TEX_COMPRESS_DEFAULT;
 
-            case OPT_BC_COMPRESS:
-                {
-                    dwCompress = TEX_COMPRESS_DEFAULT;
+    //                bool found = false;
+    //                if (wcschr(pValue, L'u'))
+    //                {
+    //                    dwCompress |= TEX_COMPRESS_UNIFORM;
+    //                    found = true;
+    //                }
 
-                    bool found = false;
-                    if (wcschr(pValue, L'u'))
-                    {
-                        dwCompress |= TEX_COMPRESS_UNIFORM;
-                        found = true;
-                    }
+    //                if (wcschr(pValue, L'd'))
+    //                {
+    //                    dwCompress |= TEX_COMPRESS_DITHER;
+    //                    found = true;
+    //                }
 
-                    if (wcschr(pValue, L'd'))
-                    {
-                        dwCompress |= TEX_COMPRESS_DITHER;
-                        found = true;
-                    }
+    //                if (wcschr(pValue, L'q'))
+    //                {
+    //                    dwCompress |= TEX_COMPRESS_BC7_QUICK;
+    //                    found = true;
+    //                }
 
-                    if (wcschr(pValue, L'q'))
-                    {
-                        dwCompress |= TEX_COMPRESS_BC7_QUICK;
-                        found = true;
-                    }
+    //                if (wcschr(pValue, L'x'))
+    //                {
+    //                    dwCompress |= TEX_COMPRESS_BC7_USE_3SUBSETS;
+    //                    found = true;
+    //                }
 
-                    if (wcschr(pValue, L'x'))
-                    {
-                        dwCompress |= TEX_COMPRESS_BC7_USE_3SUBSETS;
-                        found = true;
-                    }
+    //                if ((dwCompress & (TEX_COMPRESS_BC7_QUICK | TEX_COMPRESS_BC7_USE_3SUBSETS)) == (TEX_COMPRESS_BC7_QUICK | TEX_COMPRESS_BC7_USE_3SUBSETS))
+    //                {
+    //                    wprintf(L"Can't use -bc x (max) and -bc q (quick) at same time\n\n");
+    //                    PrintUsage();
+    //                    return 1;
+    //                }
 
-                    if ((dwCompress & (TEX_COMPRESS_BC7_QUICK | TEX_COMPRESS_BC7_USE_3SUBSETS)) == (TEX_COMPRESS_BC7_QUICK | TEX_COMPRESS_BC7_USE_3SUBSETS))
-                    {
-                        wprintf(L"Can't use -bc x (max) and -bc q (quick) at same time\n\n");
-                        PrintUsage();
-                        return 1;
-                    }
+    //                if (!found)
+    //                {
+    //                    wprintf(L"Invalid value specified for -bc (%ls), missing d, u, q, or x\n\n", pValue);
+    //                    return 1;
+    //                }
+    //            }
+    //            break;
 
-                    if (!found)
-                    {
-                        wprintf(L"Invalid value specified for -bc (%ls), missing d, u, q, or x\n\n", pValue);
-                        return 1;
-                    }
-                }
-                break;
+    //        case OPT_WIC_QUALITY:
+    //            if (swscanf_s(pValue, L"%f", &wicQuality) != 1
+    //                || (wicQuality < 0.f)
+    //                || (wicQuality > 1.f))
+    //            {
+    //                wprintf(L"Invalid value specified with -wicq (%ls)\n", pValue);
+    //                printf("\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_WIC_QUALITY:
-                if (swscanf_s(pValue, L"%f", &wicQuality) != 1
-                    || (wicQuality < 0.f)
-                    || (wicQuality > 1.f))
-                {
-                    wprintf(L"Invalid value specified with -wicq (%ls)\n", pValue);
-                    printf("\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_COLORKEY:
+    //            if (swscanf_s(pValue, L"%x", &colorKey) != 1)
+    //            {
+    //                printf("Invalid value specified with -c (%ls)\n", pValue);
+    //                printf("\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            colorKey &= 0xFFFFFF;
+    //            break;
 
-            case OPT_COLORKEY:
-                if (swscanf_s(pValue, L"%x", &colorKey) != 1)
-                {
-                    printf("Invalid value specified with -c (%ls)\n", pValue);
-                    printf("\n");
-                    PrintUsage();
-                    return 1;
-                }
-                colorKey &= 0xFFFFFF;
-                break;
+    //        case OPT_X2_BIAS:
+    //            dwConvert |= TEX_FILTER_FLOAT_X2BIAS;
+    //            break;
 
-            case OPT_X2_BIAS:
-                dwConvert |= TEX_FILTER_FLOAT_X2BIAS;
-                break;
+    //        case OPT_USE_DX10:
+    //            if (dwOptions & (uint64_t(1) << OPT_USE_DX9))
+    //            {
+    //                wprintf(L"Can't use -dx9 and -dx10 at same time\n\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_USE_DX10:
-                if (dwOptions & (uint64_t(1) << OPT_USE_DX9))
-                {
-                    wprintf(L"Can't use -dx9 and -dx10 at same time\n\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_USE_DX9:
+    //            if (dwOptions & (uint64_t(1) << OPT_USE_DX10))
+    //            {
+    //                wprintf(L"Can't use -dx9 and -dx10 at same time\n\n");
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_USE_DX9:
-                if (dwOptions & (uint64_t(1) << OPT_USE_DX10))
-                {
-                    wprintf(L"Can't use -dx9 and -dx10 at same time\n\n");
-                    PrintUsage();
-                    return 1;
-                }
-                break;
+    //        case OPT_RECURSIVE:
+    //            if (*pValue)
+    //            {
+    //                // This option takes 'flatten' or 'keep' with ':' syntax
+    //                if (!_wcsicmp(pValue, L"keep"))
+    //                {
+    //                    keepRecursiveDirs = true;
+    //                }
+    //                else if (_wcsicmp(pValue, L"flatten") != 0)
+    //                {
+    //                    wprintf(L"For recursive use -r, -r:flatten, or -r:keep\n\n");
+    //                    PrintUsage();
+    //                    return 1;
+    //                }
+    //            }
+    //            break;
 
-            case OPT_RECURSIVE:
-                if (*pValue)
-                {
-                    // This option takes 'flatten' or 'keep' with ':' syntax
-                    if (!_wcsicmp(pValue, L"keep"))
-                    {
-                        keepRecursiveDirs = true;
-                    }
-                    else if (_wcsicmp(pValue, L"flatten") != 0)
-                    {
-                        wprintf(L"For recursive use -r, -r:flatten, or -r:keep\n\n");
-                        PrintUsage();
-                        return 1;
-                    }
-                }
-                break;
+    //        case OPT_FILELIST:
+    //            {
+    //                std::filesystem::path path(pValue);
+    //                std::wifstream inFile(path.make_preferred().c_str());
+    //                if (!inFile)
+    //                {
+    //                    wprintf(L"Error opening -flist file %ls\n", pValue);
+    //                    return 1;
+    //                }
 
-            case OPT_FILELIST:
-                {
-                    std::filesystem::path path(pValue);
-                    std::wifstream inFile(path.make_preferred().c_str());
-                    if (!inFile)
-                    {
-                        wprintf(L"Error opening -flist file %ls\n", pValue);
-                        return 1;
-                    }
+    //                inFile.imbue(std::locale::classic());
 
-                    inFile.imbue(std::locale::classic());
+    //                ProcessFileList(inFile, conversion);
+    //            }
+    //            break;
 
-                    ProcessFileList(inFile, conversion);
-                }
-                break;
+    //        case OPT_PAPER_WHITE_NITS:
+    //            if (swscanf_s(pValue, L"%f", &paperWhiteNits) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -nits (%ls)\n\n", pValue);
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (paperWhiteNits > 10000.f || paperWhiteNits <= 0.f)
+    //            {
+    //                wprintf(L"-nits (%ls) parameter must be between 0 and 10000\n\n", pValue);
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_PAPER_WHITE_NITS:
-                if (swscanf_s(pValue, L"%f", &paperWhiteNits) != 1)
-                {
-                    wprintf(L"Invalid value specified with -nits (%ls)\n\n", pValue);
-                    PrintUsage();
-                    return 1;
-                }
-                else if (paperWhiteNits > 10000.f || paperWhiteNits <= 0.f)
-                {
-                    wprintf(L"-nits (%ls) parameter must be between 0 and 10000\n\n", pValue);
-                    return 1;
-                }
-                break;
+    //        case OPT_PRESERVE_ALPHA_COVERAGE:
+    //            if (swscanf_s(pValue, L"%f", &preserveAlphaCoverageRef) != 1)
+    //            {
+    //                wprintf(L"Invalid value specified with -keepcoverage (%ls)\n\n", pValue);
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (preserveAlphaCoverageRef < 0.0f || preserveAlphaCoverageRef > 1.0f)
+    //            {
+    //                wprintf(L"-keepcoverage (%ls) parameter must be between 0.0 and 1.0\n\n", pValue);
+    //                return 1;
+    //            }
+    //            break;
 
-            case OPT_PRESERVE_ALPHA_COVERAGE:
-                if (swscanf_s(pValue, L"%f", &preserveAlphaCoverageRef) != 1)
-                {
-                    wprintf(L"Invalid value specified with -keepcoverage (%ls)\n\n", pValue);
-                    PrintUsage();
-                    return 1;
-                }
-                else if (preserveAlphaCoverageRef < 0.0f || preserveAlphaCoverageRef > 1.0f)
-                {
-                    wprintf(L"-keepcoverage (%ls) parameter must be between 0.0 and 1.0\n\n", pValue);
-                    return 1;
-                }
-                break;
-
-            case OPT_SWIZZLE:
-                if (!*pValue || wcslen(pValue) > 4)
-                {
-                    wprintf(L"Invalid value specified with -swizzle (%ls)\n\n", pValue);
-                    PrintUsage();
-                    return 1;
-                }
-                else if (!ParseSwizzleMask(pValue, swizzleElements, zeroElements, oneElements))
-                {
-                    wprintf(L"-swizzle requires a 1 to 4 character mask composed of these letters: r, g, b, a, x, y, w, z, 0, 1\n");
-                    return 1;
-                }
-                break;
-            }
-        }
-        else if (wcspbrk(pArg, L"?*") != nullptr)
-        {
-            const size_t count = conversion.size();
-            std::filesystem::path path(pArg);
-            SearchForFiles(path.make_preferred().c_str(), conversion, (dwOptions & (uint64_t(1) << OPT_RECURSIVE)) != 0, nullptr);
-            if (conversion.size() <= count)
-            {
-                wprintf(L"No matching files found for %ls\n", pArg);
-                return 1;
-            }
-        }
-        else
-        {
-            SConversion conv = {};
-            std::filesystem::path path(pArg);
-            wcscpy_s(conv.szSrc, path.make_preferred().c_str());
-            conversion.push_back(conv);
-        }
-    }
+    //        case OPT_SWIZZLE:
+    //            if (!*pValue || wcslen(pValue) > 4)
+    //            {
+    //                wprintf(L"Invalid value specified with -swizzle (%ls)\n\n", pValue);
+    //                PrintUsage();
+    //                return 1;
+    //            }
+    //            else if (!ParseSwizzleMask(pValue, swizzleElements, zeroElements, oneElements))
+    //            {
+    //                wprintf(L"-swizzle requires a 1 to 4 character mask composed of these letters: r, g, b, a, x, y, w, z, 0, 1\n");
+    //                return 1;
+    //            }
+    //            break;
+    //        }
+    //    }
+    //    else if (wcspbrk(pArg, L"?*") != nullptr)
+    //    {
+    //        const size_t count = conversion.size();
+    //        std::filesystem::path path(pArg);
+    //        SearchForFiles(path.make_preferred().c_str(), conversion, (dwOptions & (uint64_t(1) << OPT_RECURSIVE)) != 0, nullptr);
+    //        if (conversion.size() <= count)
+    //        {
+    //            wprintf(L"No matching files found for %ls\n", pArg);
+    //            return 1;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        SConversion conv = {};
+    //        std::filesystem::path path(pArg);
+    //        wcscpy_s(conv.szSrc, path.make_preferred().c_str());
+    //        conversion.push_back(conv);
+    //    }
+    //}
 
     if (conversion.empty())
     {
@@ -2005,8 +2009,8 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
         return 0;
     }
 
-    if (~dwOptions & (uint64_t(1) << OPT_NOLOGO))
-        PrintLogo(false);
+    //if (~dwOptions & (uint64_t(1) << OPT_NOLOGO))
+    //    PrintLogo(false);
 
     // Work out out filename prefix and suffix
     if (szOutputDir[0] && (std::filesystem::path::preferred_separator != szOutputDir[wcslen(szOutputDir) - 1]))
@@ -3809,4 +3813,6 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
     }
 
     return retVal;
+}
+
 }
