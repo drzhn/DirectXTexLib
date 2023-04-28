@@ -254,6 +254,6 @@ namespace TextureConversion
     };
 
 
-    int Convert(TexconvConversionParams* params);
+    int Convert(TexconvConversionParams* params, uint64_t options, const char* filePath);
 }
 #endif // TEXCONV_H

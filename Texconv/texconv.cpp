@@ -1290,7 +1290,7 @@ namespace
 namespace TextureConversion
 {
 
-int Convert(TexconvConversionParams* params)
+int Convert(TexconvConversionParams* params, uint64_t options, const char* filePath)
 {
     if (!params)
     {
@@ -1341,13 +1341,18 @@ int Convert(TexconvConversionParams* params)
     }
 
     // Process command line
-    uint64_t dwOptions = 0;
+    uint64_t dwOptions = options;
     std::list<SConversion> conversion;
+
+    SConversion conv = {};
+    std::filesystem::path path(filePath);
+    wcscpy_s(conv.szSrc, path.make_preferred().c_str());
+    conversion.push_back(conv);
+
     //bool allowOpts = true;
     //for (int iArg = 1; iArg < argc; iArg++)
     //{
     //    PWSTR pArg = argv[iArg];
-
     //    if (allowOpts
     //        && ('-' == pArg[0]) && ('-' == pArg[1]))
     //    {
@@ -1377,7 +1382,6 @@ int Convert(TexconvConversionParams* params)
     //    {
     //        pArg++;
     //        PWSTR pValue;
-
     //        for (pValue = pArg; *pValue && (':' != *pValue); pValue++);
 
     //        if (*pValue)
