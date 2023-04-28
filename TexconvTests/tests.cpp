@@ -2,6 +2,6 @@
 
 int main ()
 {
-    TextureConversion::convert();
+    TextureConversion::Convert(nullptr);
     return 0;
 }
