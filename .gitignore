@@ -25,6 +25,8 @@
 *.txt
 *.recipe
 *.res
+*.exe
+*.aps
 .vs
 [Bb]in
 packages

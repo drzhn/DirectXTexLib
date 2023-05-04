@@ -9,6 +9,8 @@
 // http://go.microsoft.com/fwlink/?LinkId=248926
 //--------------------------------------------------------------------------------------
 
+#include "Texconv.h"
+
 #pragma warning(push)
 #pragma warning(disable : 4005)
 #define WIN32_LEAN_AND_MEAN
@@ -70,10 +72,35 @@ using namespace DirectX;
 using namespace DirectX::PackedVector;
 using Microsoft::WRL::ComPtr;
 
-#include "Texconv.h"
-
 namespace
 {
+    enum
+    {
+        ROTATE_709_TO_HDR10 = 1,
+        ROTATE_HDR10_TO_709,
+        ROTATE_709_TO_2020,
+        ROTATE_2020_TO_709,
+        ROTATE_P3D65_TO_HDR10,
+        ROTATE_P3D65_TO_2020,
+        ROTATE_709_TO_P3D65,
+        ROTATE_P3D65_TO_709,
+    };
+
+    static_assert(OPT_MAX <= 64, "dwOptions is a unsigned int bitfield");
+
+    struct SConversion
+    {
+        wchar_t szSrc[MAX_PATH];
+        wchar_t szFolder[MAX_PATH];
+    };
+
+    template<typename T>
+    struct SValue
+    {
+        const wchar_t*  name;
+        T               value;
+    };
+
     const SValue<uint64_t> g_pOptions[] =
     {
         { L"r",             OPT_RECURSIVE },
@@ -330,6 +357,18 @@ namespace
         { L"P3D65to709",    ROTATE_P3D65_TO_709 },
         { nullptr, 0 },
     };
+
+#define CODEC_DDS 0xFFFF0001
+#define CODEC_TGA 0xFFFF0002
+#define CODEC_HDP 0xFFFF0003
+#define CODEC_JXR 0xFFFF0004
+#define CODEC_HDR 0xFFFF0005
+#define CODEC_PPM 0xFFFF0006
+#define CODEC_PFM 0xFFFF0007
+
+#ifdef USE_OPENEXR
+#define CODEC_EXR 0xFFFF0008
+#endif
 
     const SValue<uint32_t> g_pSaveFileTypes[] =   // valid formats to write to
     {
@@ -1303,24 +1342,24 @@ int Convert(TexconvConversionParams* params, uint64_t options, const char* fileP
     size_t height = params->height;
     size_t mipLevels = params->mipLevels;
     DXGI_FORMAT format = params->format;
-    TEX_FILTER_FLAGS dwFilter = params->dwFilter;
-    TEX_FILTER_FLAGS dwSRGB = params->dwSRGB;
-    TEX_FILTER_FLAGS dwConvert = params->dwConvert;
-    TEX_COMPRESS_FLAGS dwCompress = params->dwCompress;
-    TEX_FILTER_FLAGS dwFilterOpts = params->dwFilterOpts;
-    uint32_t FileType = params->FileType;
-    uint32_t maxSize = params->maxSize;
-    int adapter = params->adapter;
-    float alphaThreshold = params->alphaThreshold;
-    float alphaWeight = params->alphaWeight;
-    CNMAP_FLAGS dwNormalMap = params->dwNormalMap;
-    float nmapAmplitude = params->nmapAmplitude;
-    float wicQuality = params->wicQuality;
-    uint32_t colorKey = params->colorKey;
-    uint32_t dwRotateColor = params->dwRotateColor;
-    float paperWhiteNits = params->paperWhiteNits;
-    float preserveAlphaCoverageRef = params->preserveAlphaCoverageRef;
-    bool keepRecursiveDirs = params->keepRecursiveDirs;
+    TEX_FILTER_FLAGS dwFilter = DirectX::TEX_FILTER_DEFAULT;
+    TEX_FILTER_FLAGS dwSRGB = DirectX::TEX_FILTER_DEFAULT;
+    TEX_FILTER_FLAGS dwConvert = DirectX::TEX_FILTER_DEFAULT;
+    TEX_COMPRESS_FLAGS dwCompress = DirectX::TEX_COMPRESS_DEFAULT;
+    TEX_FILTER_FLAGS dwFilterOpts = DirectX::TEX_FILTER_DEFAULT;
+    uint32_t FileType = CODEC_DDS;
+    uint32_t maxSize = 16384;
+    int adapter = -1;
+    float alphaThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
+    float alphaWeight = 1.f;
+    CNMAP_FLAGS dwNormalMap = DirectX::CNMAP_DEFAULT;
+    float nmapAmplitude = 1.f;
+    float wicQuality = -1.f;
+    uint32_t colorKey = 0;
+    uint32_t dwRotateColor = 0;
+    float paperWhiteNits = 200.f;
+    float preserveAlphaCoverageRef = 0.0f;
+    bool keepRecursiveDirs = false;
     uint32_t swizzleElements[4] = { 0, 1, 2, 3 };
     uint32_t zeroElements[4] = {};
     uint32_t oneElements[4] = {};
