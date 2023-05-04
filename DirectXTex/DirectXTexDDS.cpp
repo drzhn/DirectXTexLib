@@ -11,6 +11,9 @@
 
 #include "DirectXTexP.h"
 
+#include <fstream>
+#include <filesystem>
+
 #include "DDS.h"
 
 using namespace DirectX;
@@ -2231,32 +2234,6 @@ HRESULT DirectX::SaveToDDSFile(
         return hr;
 
     // Create file and write header
-#ifdef _WIN32
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
-    ScopedHandle hFile(safe_handle(CreateFile2(szFile,
-        GENERIC_WRITE | DELETE, 0, CREATE_ALWAYS, nullptr)));
-#else
-    ScopedHandle hFile(safe_handle(CreateFileW(szFile,
-        GENERIC_WRITE | DELETE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr)));
-#endif
-    if (!hFile)
-    {
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-
-    auto_delete_file delonfail(hFile.get());
-
-    DWORD bytesWritten;
-    if (!WriteFile(hFile.get(), header, static_cast<DWORD>(required), &bytesWritten, nullptr))
-    {
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-
-    if (bytesWritten != required)
-    {
-        return E_FAIL;
-    }
-#else // !WIN32
     std::ofstream outFile(std::filesystem::path(szFile), std::ios::out | std::ios::binary | std::ios::trunc);
     if (!outFile)
         return E_FAIL;
@@ -2264,7 +2241,6 @@ HRESULT DirectX::SaveToDDSFile(
     outFile.write(reinterpret_cast<char*>(header), static_cast<std::streamsize>(required));
     if (!outFile)
         return E_FAIL;
-#endif
 
     // Write images
     switch (static_cast<DDS_RESOURCE_DIMENSION>(metadata.dimension))
@@ -2293,21 +2269,10 @@ HRESULT DirectX::SaveToDDSFile(
 
                     if ((images[index].slicePitch == ddsSlicePitch) && (ddsSlicePitch <= UINT32_MAX))
                     {
-                    #ifdef _WIN32
-                        if (!WriteFile(hFile.get(), images[index].pixels, static_cast<DWORD>(ddsSlicePitch), &bytesWritten, nullptr))
-                        {
-                            return HRESULT_FROM_WIN32(GetLastError());
-                        }
 
-                        if (bytesWritten != ddsSlicePitch)
-                        {
-                            return E_FAIL;
-                        }
-                    #else
                         outFile.write(reinterpret_cast<char*>(images[index].pixels), static_cast<std::streamsize>(ddsSlicePitch));
                         if (!outFile)
                             return E_FAIL;
-                    #endif
                     }
                     else
                     {
@@ -2326,21 +2291,10 @@ HRESULT DirectX::SaveToDDSFile(
                         const size_t lines = ComputeScanlines(metadata.format, images[index].height);
                         for (size_t j = 0; j < lines; ++j)
                         {
-                        #ifdef _WIN32
-                            if (!WriteFile(hFile.get(), sPtr, static_cast<DWORD>(ddsRowPitch), &bytesWritten, nullptr))
-                            {
-                                return HRESULT_FROM_WIN32(GetLastError());
-                            }
 
-                            if (bytesWritten != ddsRowPitch)
-                            {
-                                return E_FAIL;
-                            }
-                        #else
                             outFile.write(reinterpret_cast<const char*>(sPtr), static_cast<std::streamsize>(ddsRowPitch));
                             if (!outFile)
                                 return E_FAIL;
-                        #endif
 
                             sPtr += rowPitch;
                         }
@@ -2378,21 +2332,10 @@ HRESULT DirectX::SaveToDDSFile(
 
                     if ((images[index].slicePitch == ddsSlicePitch) && (ddsSlicePitch <= UINT32_MAX))
                     {
-                    #ifdef _WIN32
-                        if (!WriteFile(hFile.get(), images[index].pixels, static_cast<DWORD>(ddsSlicePitch), &bytesWritten, nullptr))
-                        {
-                            return HRESULT_FROM_WIN32(GetLastError());
-                        }
 
-                        if (bytesWritten != ddsSlicePitch)
-                        {
-                            return E_FAIL;
-                        }
-                    #else
                         outFile.write(reinterpret_cast<char*>(images[index].pixels), static_cast<std::streamsize>(ddsSlicePitch));
                         if (!outFile)
                             return E_FAIL;
-                    #endif
                     }
                     else
                     {
@@ -2411,21 +2354,10 @@ HRESULT DirectX::SaveToDDSFile(
                         const size_t lines = ComputeScanlines(metadata.format, images[index].height);
                         for (size_t j = 0; j < lines; ++j)
                         {
-                        #ifdef _WIN32
-                            if (!WriteFile(hFile.get(), sPtr, static_cast<DWORD>(ddsRowPitch), &bytesWritten, nullptr))
-                            {
-                                return HRESULT_FROM_WIN32(GetLastError());
-                            }
 
-                            if (bytesWritten != ddsRowPitch)
-                            {
-                                return E_FAIL;
-                            }
-                        #else
                             outFile.write(reinterpret_cast<const char*>(sPtr), static_cast<std::streamsize>(ddsRowPitch));
                             if (!outFile)
                                 return E_FAIL;
-                        #endif
                             sPtr += rowPitch;
                         }
                     }
@@ -2441,9 +2373,6 @@ HRESULT DirectX::SaveToDDSFile(
         return E_FAIL;
     }
 
-#ifdef _WIN32
-    delonfail.clear();
-#endif
 
     return S_OK;
 }

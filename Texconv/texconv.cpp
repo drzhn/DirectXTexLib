@@ -1329,19 +1329,19 @@ namespace
 namespace TextureConversion
 {
 
-int Convert(TexconvConversionParams* params, uint64_t options, const char* filePath)
+int Convert(
+    const TexconvConversionParams& params,
+    uint64_t options,
+    const char* filePath,
+    TextureMetadata& outMetadata,
+    std::vector<char*>& outData)
 {
-    if (!params)
-    {
-        return 1;
-    }
-
     // Parameters and defaults
     // Copy all of the parameters of params just not for replacing all params in the next 2k lines
-    size_t width = params->width;
-    size_t height = params->height;
-    size_t mipLevels = params->mipLevels;
-    DXGI_FORMAT format = params->format;
+    size_t width = params.width;
+    size_t height = params.height;
+    size_t mipLevels = params.mipLevels;
+    DXGI_FORMAT format = params.format;
     TEX_FILTER_FLAGS dwFilter = DirectX::TEX_FILTER_DEFAULT;
     TEX_FILTER_FLAGS dwSRGB = DirectX::TEX_FILTER_DEFAULT;
     TEX_FILTER_FLAGS dwConvert = DirectX::TEX_FILTER_DEFAULT;

@@ -3,6 +3,7 @@
 
 #include <dxgiformat.h>
 #include <cstdint>
+#include <vector>
 
 namespace 
 {
@@ -71,6 +72,16 @@ namespace
 
 namespace TextureConversion
 {
+    struct TextureMetadata
+    {
+        size_t          width;
+        size_t          height;     // Should be 1 for 1D textures
+        size_t          depth;      // Should be 1 for 1D or 2D textures
+        size_t          arraySize;  // For cubemap, this is a multiple of 6
+        size_t          mipLevels;
+        DXGI_FORMAT     format;
+    };
+
     struct TexconvConversionParams
     {
         size_t width = 0;
@@ -79,6 +90,12 @@ namespace TextureConversion
         DXGI_FORMAT format = DXGI_FORMAT_UNKNOWN;
     };
 
-    int Convert(TexconvConversionParams* params, uint64_t options, const char* filePath);
+    int Convert(
+        const TexconvConversionParams& params,
+        uint64_t options,
+        const char* filePath,
+        TextureMetadata& outMetadata,
+        std::vector<char*>& outData
+    );
 }
 #endif // TEXCONV_H

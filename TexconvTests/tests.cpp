@@ -6,12 +6,16 @@ int main()
 
     params.format = DXGI_FORMAT_BC1_UNORM;
 
-    uint64_t options =
-        (1 << OPT_MIPLEVELS) |
-        (1 << OPT_FORMAT) |
-        (1 << OPT_FIT_POWEROF2) |
-        (1 << OPT_OVERWRITE);
+    const uint64_t options =
+        (1ull << OPT_MIPLEVELS) |
+        (1ull << OPT_FORMAT) |
+        (1ull << OPT_FIT_POWEROF2) |
+        (1ull << OPT_OVERWRITE);
 
-    TextureConversion::Convert(&params, options, "pngTexture.png");
+    TextureConversion::TextureMetadata metadata;
+    std::vector<char*> data;
+
+
+    TextureConversion::Convert(params, options, "pngTexture.png", metadata, data);
     return 0;
 }
