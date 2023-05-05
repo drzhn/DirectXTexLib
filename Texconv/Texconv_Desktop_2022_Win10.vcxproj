@@ -437,6 +437,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Blob.cpp" />
     <ClCompile Include="ExtendedBMP.cpp" />
     <ClCompile Include="PortablePixMap.cpp" />
     <ClCompile Include="Texconv.cpp" />
@@ -447,6 +448,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Blob.h" />
     <ClInclude Include="..\include\Texconv.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

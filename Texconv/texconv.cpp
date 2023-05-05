@@ -1326,15 +1326,14 @@ namespace
 //#pragma prefast(disable : 28198, "Command-line tool, frees all memory on exit")
 //#endif
 
-namespace TextureConversion
+namespace AssetConversion
 {
-
 int Convert(
-    const TexconvConversionParams& params,
+    const TextureConversionParams& params,
     uint64_t options,
     const char* filePath,
     TextureMetadata& outMetadata,
-    std::vector<char*>& outData)
+    Blob& outBlob)
 {
     // Parameters and defaults
     // Copy all of the parameters of params just not for replacing all params in the next 2k lines
@@ -1364,9 +1363,9 @@ int Convert(
     uint32_t zeroElements[4] = {};
     uint32_t oneElements[4] = {};
 
-    wchar_t szPrefix[MAX_PATH] = {};
-    wchar_t szSuffix[MAX_PATH] = {};
-    wchar_t szOutputDir[MAX_PATH] = {};
+    //wchar_t szPrefix[MAX_PATH] = {};
+    //wchar_t szSuffix[MAX_PATH] = {};
+    //wchar_t szOutputDir[MAX_PATH] = {};
 
     // Set locale for output since GetErrorDesc can get localized strings.
     std::locale::global(std::locale(""));
@@ -1961,23 +1960,23 @@ int Convert(
     //    PrintLogo(false);
 
     // Work out out filename prefix and suffix
-    if (szOutputDir[0] && (std::filesystem::path::preferred_separator != szOutputDir[wcslen(szOutputDir) - 1]))
-    {
-        wchar_t pSeparator[2] = { std::filesystem::path::preferred_separator, 0 };
-        wcscat_s(szOutputDir, MAX_PATH, pSeparator);
-    }
+    //if (szOutputDir[0] && (std::filesystem::path::preferred_separator != szOutputDir[wcslen(szOutputDir) - 1]))
+    //{
+    //    wchar_t pSeparator[2] = { std::filesystem::path::preferred_separator, 0 };
+    //    wcscat_s(szOutputDir, MAX_PATH, pSeparator);
+    //}
 
-    auto fileTypeName = LookupByValue(FileType, g_pSaveFileTypes);
+    //auto fileTypeName = LookupByValue(FileType, g_pSaveFileTypes);
 
-    if (fileTypeName)
-    {
-        wcscat_s(szSuffix, MAX_PATH, L".");
-        wcscat_s(szSuffix, MAX_PATH, fileTypeName);
-    }
-    else
-    {
-        wcscat_s(szSuffix, MAX_PATH, L".unknown");
-    }
+    //if (fileTypeName)
+    //{
+    //    wcscat_s(szSuffix, MAX_PATH, L".");
+    //    wcscat_s(szSuffix, MAX_PATH, fileTypeName);
+    //}
+    //else
+    //{
+    //    wcscat_s(szSuffix, MAX_PATH, L".unknown");
+    //}
 
     if (FileType != CODEC_DDS)
     {
@@ -3543,75 +3542,75 @@ int Convert(
             // Figure out dest filename
             wchar_t *pchSlash, *pchDot;
 
-            wchar_t szDest[1024] = {};
-            wcscpy_s(szDest, szOutputDir);
+            //wchar_t szDest[1024] = {};
+            //wcscpy_s(szDest, szOutputDir);
 
-            if (keepRecursiveDirs && *pConv->szFolder)
-            {
-                wcscat_s(szDest, pConv->szFolder);
+            //if (keepRecursiveDirs && *pConv->szFolder)
+            //{
+            //    wcscat_s(szDest, pConv->szFolder);
 
-                wchar_t szPath[MAX_PATH] = {};
-                if (!GetFullPathNameW(szDest, MAX_PATH, szPath, nullptr))
-                {
-                    wprintf(L" get full path FAILED (%08X%ls)\n",
-                        static_cast<unsigned int>(HRESULT_FROM_WIN32(GetLastError())), GetErrorDesc(HRESULT_FROM_WIN32(GetLastError())));
-                    retVal = 1;
-                    continue;
-                }
+            //    wchar_t szPath[MAX_PATH] = {};
+            //    if (!GetFullPathNameW(szDest, MAX_PATH, szPath, nullptr))
+            //    {
+            //        wprintf(L" get full path FAILED (%08X%ls)\n",
+            //            static_cast<unsigned int>(HRESULT_FROM_WIN32(GetLastError())), GetErrorDesc(HRESULT_FROM_WIN32(GetLastError())));
+            //        retVal = 1;
+            //        continue;
+            //    }
 
-                auto const err = static_cast<DWORD>(SHCreateDirectoryExW(nullptr, szPath, nullptr));
-                if (err != ERROR_SUCCESS && err != ERROR_ALREADY_EXISTS)
-                {
-                    wprintf(L" directory creation FAILED (%08X%ls)\n",
-                        static_cast<unsigned int>(HRESULT_FROM_WIN32(err)), GetErrorDesc(HRESULT_FROM_WIN32(err)));
-                    retVal = 1;
-                    continue;
-                }
-            }
+            //    auto const err = static_cast<DWORD>(SHCreateDirectoryExW(nullptr, szPath, nullptr));
+            //    if (err != ERROR_SUCCESS && err != ERROR_ALREADY_EXISTS)
+            //    {
+            //        wprintf(L" directory creation FAILED (%08X%ls)\n",
+            //            static_cast<unsigned int>(HRESULT_FROM_WIN32(err)), GetErrorDesc(HRESULT_FROM_WIN32(err)));
+            //        retVal = 1;
+            //        continue;
+            //    }
+            //}
 
-            if (*szPrefix)
-                wcscat_s(szDest, szPrefix);
+            //if (*szPrefix)
+            //    wcscat_s(szDest, szPrefix);
 
-            pchSlash = wcsrchr(pConv->szSrc, std::filesystem::path::preferred_separator);
-            if (pchSlash)
-                wcscat_s(szDest, pchSlash + 1);
-            else
-                wcscat_s(szDest, pConv->szSrc);
+            //pchSlash = wcsrchr(pConv->szSrc, std::filesystem::path::preferred_separator);
+            //if (pchSlash)
+            //    wcscat_s(szDest, pchSlash + 1);
+            //else
+            //    wcscat_s(szDest, pConv->szSrc);
 
-            pchSlash = wcsrchr(szDest, std::filesystem::path::preferred_separator);
-            pchDot = wcsrchr(szDest, '.');
+            //pchSlash = wcsrchr(szDest, std::filesystem::path::preferred_separator);
+            //pchDot = wcsrchr(szDest, '.');
 
-            if (pchDot > pchSlash)
-                *pchDot = 0;
+            //if (pchDot > pchSlash)
+            //    *pchDot = 0;
 
-            if (*szSuffix)
-                wcscat_s(szDest, szSuffix);
+            //if (*szSuffix)
+            //    wcscat_s(szDest, szSuffix);
 
-            if (dwOptions & (uint64_t(1) << OPT_TOLOWER))
-            {
-                std::ignore = _wcslwr_s(szDest);
-            }
+            //if (dwOptions & (uint64_t(1) << OPT_TOLOWER))
+            //{
+            //    std::ignore = _wcslwr_s(szDest);
+            //}
 
-            if (wcslen(szDest) > _MAX_PATH)
-            {
-                wprintf(L"\nERROR: Output filename exceeds max-path, skipping!\n");
-                retVal = 1;
-                continue;
-            }
+            //if (wcslen(szDest) > _MAX_PATH)
+            //{
+            //    wprintf(L"\nERROR: Output filename exceeds max-path, skipping!\n");
+            //    retVal = 1;
+            //    continue;
+            //}
 
-            // Write texture
-            wprintf(L"writing %ls", szDest);
-            fflush(stdout);
+            //// Write texture
+            //wprintf(L"writing %ls", szDest);
+            //fflush(stdout);
 
-            if (~dwOptions & (uint64_t(1) << OPT_OVERWRITE))
-            {
-                if (GetFileAttributesW(szDest) != INVALID_FILE_ATTRIBUTES)
-                {
-                    wprintf(L"\nERROR: Output file already exists, use -y to overwrite:\n");
-                    retVal = 1;
-                    continue;
-                }
-            }
+            //if (~dwOptions & (uint64_t(1) << OPT_OVERWRITE))
+            //{
+            //    if (GetFileAttributesW(szDest) != INVALID_FILE_ATTRIBUTES)
+            //    {
+            //        wprintf(L"\nERROR: Output file already exists, use -y to overwrite:\n");
+            //        retVal = 1;
+            //        continue;
+            //    }
+            //}
 
             switch (FileType)
             {
@@ -3627,24 +3626,26 @@ int Convert(
                         ddsFlags |= DDS_FLAGS_FORCE_DX9_LEGACY;
                     }
 
-                    hr = SaveToDDSFile(img, nimg, info, ddsFlags, szDest);
+                    hr = SaveToDDSMemory(img, nimg, info, ddsFlags, outBlob);
                     break;
                 }
 
             case CODEC_TGA:
-                hr = SaveToTGAFile(img[0], TGA_FLAGS_NONE, szDest, (dwOptions & (uint64_t(1) << OPT_TGA20)) ? &info : nullptr);
+                hr = SaveToTGAMemory(img[0], TGA_FLAGS_NONE, outBlob, (dwOptions & (uint64_t(1) << OPT_TGA20)) ? &info : nullptr);
                 break;
 
             case CODEC_HDR:
-                hr = SaveToHDRFile(img[0], szDest);
+                hr = SaveToHDRMemory(img[0], outBlob);
                 break;
 
             case CODEC_PPM:
-                hr = SaveToPortablePixMap(img[0], szDest);
+                hr = E_FAIL;
+                //hr = SaveToPortablePixMap(img[0], szDest);
                 break;
 
             case CODEC_PFM:
-                hr = SaveToPortablePixMapHDR(img[0], szDest);
+                hr = E_FAIL;
+                //hr = SaveToPortablePixMapHDR(img[0], szDest);
                 break;
 
             #ifdef USE_OPENEXR
@@ -3657,7 +3658,7 @@ int Convert(
                 {
                     const WICCodecs codec = (FileType == CODEC_HDP || FileType == CODEC_JXR) ? WIC_CODEC_WMP : static_cast<WICCodecs>(FileType);
                     const size_t nimages = (dwOptions & (uint64_t(1) << OPT_WIC_MULTIFRAME)) ? nimg : 1;
-                    hr = SaveToWICFile(img, nimages, WIC_FLAGS_NONE, GetWICCodec(codec), szDest, nullptr,
+                    hr = SaveToWICMemory(img, nimages, WIC_FLAGS_NONE, GetWICCodec(codec), outBlob, nullptr,
                         [&](IPropertyBag2* props)
                         {
                             const bool wicLossless = (dwOptions & (uint64_t(1) << OPT_WIC_LOSSLESS)) != 0;

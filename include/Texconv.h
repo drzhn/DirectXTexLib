@@ -3,7 +3,8 @@
 
 #include <dxgiformat.h>
 #include <cstdint>
-#include <vector>
+
+class Blob;
 
 namespace 
 {
@@ -70,7 +71,7 @@ namespace
     };
 }
 
-namespace TextureConversion
+namespace AssetConversion
 {
     struct TextureMetadata
     {
@@ -82,7 +83,7 @@ namespace TextureConversion
         DXGI_FORMAT     format;
     };
 
-    struct TexconvConversionParams
+    struct TextureConversionParams
     {
         size_t width = 0;
         size_t height = 0;
@@ -91,11 +92,11 @@ namespace TextureConversion
     };
 
     int Convert(
-        const TexconvConversionParams& params,
+        const TextureConversionParams& params,
         uint64_t options,
         const char* filePath,
         TextureMetadata& outMetadata,
-        std::vector<char*>& outData
+        Blob& outBlob
     );
 }
 #endif // TEXCONV_H
