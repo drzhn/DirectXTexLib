@@ -1387,596 +1387,6 @@ int Convert(
     wcscpy_s(conv.szSrc, path.make_preferred().c_str());
     conversion.push_back(conv);
 
-    //bool allowOpts = true;
-    //for (int iArg = 1; iArg < argc; iArg++)
-    //{
-    //    PWSTR pArg = argv[iArg];
-    //    if (allowOpts
-    //        && ('-' == pArg[0]) && ('-' == pArg[1]))
-    //    {
-    //        if (pArg[2] == 0)
-    //        {
-    //            // "-- " is the POSIX standard for "end of options" marking to escape the '-' and '/' characters at the start of filepaths.
-    //            allowOpts = false;
-    //        }
-    //        else if (!_wcsicmp(pArg,L"--version"))
-    //        {
-    //            PrintLogo(true);
-    //            return 0;
-    //        }
-    //        else if (!_wcsicmp(pArg, L"--help"))
-    //        {
-    //            PrintUsage();
-    //            return 0;
-    //        }
-    //        else
-    //        {
-    //            wprintf(L"Unknown option: %ls\n", pArg);
-    //            return 1;
-    //        }
-    //    }
-    //    else if (allowOpts
-    //        && (('-' == pArg[0]) || ('/' == pArg[0])))
-    //    {
-    //        pArg++;
-    //        PWSTR pValue;
-    //        for (pValue = pArg; *pValue && (':' != *pValue); pValue++);
-
-    //        if (*pValue)
-    //            *pValue++ = 0;
-
-    //        const uint64_t dwOption = LookupByName(pArg, g_pOptions);
-
-    //        if (!dwOption || (dwOptions & (uint64_t(1) << dwOption)))
-    //        {
-    //            PrintUsage();
-    //            return 1;
-    //        }
-
-    //        dwOptions |= (uint64_t(1) << dwOption);
-
-    //        // Handle options with additional value parameter
-    //        switch (dwOption)
-    //        {
-    //        case OPT_WIDTH:
-    //        case OPT_HEIGHT:
-    //        case OPT_MIPLEVELS:
-    //        case OPT_FORMAT:
-    //        case OPT_FILTER:
-    //        case OPT_PREFIX:
-    //        case OPT_SUFFIX:
-    //        case OPT_OUTPUTDIR:
-    //        case OPT_FILETYPE:
-    //        case OPT_GPU:
-    //        case OPT_FEATURE_LEVEL:
-    //        case OPT_ALPHA_THRESHOLD:
-    //        case OPT_ALPHA_WEIGHT:
-    //        case OPT_NORMAL_MAP:
-    //        case OPT_NORMAL_MAP_AMPLITUDE:
-    //        case OPT_WIC_QUALITY:
-    //        case OPT_BC_COMPRESS:
-    //        case OPT_COLORKEY:
-    //        case OPT_FILELIST:
-    //        case OPT_ROTATE_COLOR:
-    //        case OPT_PAPER_WHITE_NITS:
-    //        case OPT_PRESERVE_ALPHA_COVERAGE:
-    //        case OPT_SWIZZLE:
-    //            // These support either "-arg:value" or "-arg value"
-    //            if (!*pValue)
-    //            {
-    //                if ((iArg + 1 >= argc))
-    //                {
-    //                    PrintUsage();
-    //                    return 1;
-    //                }
-
-    //                iArg++;
-    //                pValue = argv[iArg];
-    //            }
-    //            break;
-    //        }
-
-    //        switch (dwOption)
-    //        {
-    //        case OPT_WIDTH:
-    //            if (swscanf_s(pValue, L"%zu", &width) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -w (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_HEIGHT:
-    //            if (swscanf_s(pValue, L"%zu", &height) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -h (%ls)\n", pValue);
-    //                printf("\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_MIPLEVELS:
-    //            if (swscanf_s(pValue, L"%zu", &mipLevels) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -m (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_FORMAT:
-    //            format = static_cast<DXGI_FORMAT>(LookupByName(pValue, g_pFormats));
-    //            if (!format)
-    //            {
-    //                format = static_cast<DXGI_FORMAT>(LookupByName(pValue, g_pFormatAliases));
-    //                if (!format)
-    //                {
-    //                    wprintf(L"Invalid value specified with -f (%ls)\n", pValue);
-    //                    wprintf(L"\n");
-    //                    PrintUsage();
-    //                    return 1;
-    //                }
-    //            }
-    //            break;
-
-    //        case OPT_FILTER:
-    //            dwFilter = static_cast<TEX_FILTER_FLAGS>(LookupByName(pValue, g_pFilters));
-    //            if (!dwFilter)
-    //            {
-    //                wprintf(L"Invalid value specified with -if (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_ROTATE_COLOR:
-    //            dwRotateColor = LookupByName(pValue, g_pRotateColor);
-    //            if (!dwRotateColor)
-    //            {
-    //                wprintf(L"Invalid value specified with -rotatecolor (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_SRGBI:
-    //            dwSRGB |= TEX_FILTER_SRGB_IN;
-    //            break;
-
-    //        case OPT_SRGBO:
-    //            dwSRGB |= TEX_FILTER_SRGB_OUT;
-    //            break;
-
-    //        case OPT_SRGB:
-    //            dwSRGB |= TEX_FILTER_SRGB;
-    //            break;
-
-    //        case OPT_SEPALPHA:
-    //            dwFilterOpts |= TEX_FILTER_SEPARATE_ALPHA;
-    //            break;
-
-    //        case OPT_NO_WIC:
-    //            dwFilterOpts |= TEX_FILTER_FORCE_NON_WIC;
-    //            break;
-
-    //        case OPT_PREFIX:
-    //            wcscpy_s(szPrefix, MAX_PATH, pValue);
-    //            break;
-
-    //        case OPT_SUFFIX:
-    //            wcscpy_s(szSuffix, MAX_PATH, pValue);
-    //            break;
-
-    //        case OPT_OUTPUTDIR:
-    //            {
-    //                std::filesystem::path path(pValue);
-    //                wcscpy_s(szOutputDir, path.make_preferred().c_str());
-    //            }
-    //            break;
-
-    //        case OPT_FILETYPE:
-    //            FileType = LookupByName(pValue, g_pSaveFileTypes);
-    //            if (!FileType)
-    //            {
-    //                wprintf(L"Invalid value specified with -ft (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_PREMUL_ALPHA:
-    //            if (dwOptions & (uint64_t(1) << OPT_DEMUL_ALPHA))
-    //            {
-    //                wprintf(L"Can't use -pmalpha and -alpha at same time\n\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_DEMUL_ALPHA:
-    //            if (dwOptions & (uint64_t(1) << OPT_PREMUL_ALPHA))
-    //            {
-    //                wprintf(L"Can't use -pmalpha and -alpha at same time\n\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_TA_WRAP:
-    //            if (dwFilterOpts & TEX_FILTER_MIRROR)
-    //            {
-    //                wprintf(L"Can't use -wrap and -mirror at same time\n\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            dwFilterOpts |= TEX_FILTER_WRAP;
-    //            break;
-
-    //        case OPT_TA_MIRROR:
-    //            if (dwFilterOpts & TEX_FILTER_WRAP)
-    //            {
-    //                wprintf(L"Can't use -wrap and -mirror at same time\n\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            dwFilterOpts |= TEX_FILTER_MIRROR;
-    //            break;
-
-    //        case OPT_NORMAL_MAP:
-    //            {
-    //                dwNormalMap = CNMAP_DEFAULT;
-
-    //                if (wcschr(pValue, L'l'))
-    //                {
-    //                    dwNormalMap |= CNMAP_CHANNEL_LUMINANCE;
-    //                }
-    //                else if (wcschr(pValue, L'r'))
-    //                {
-    //                    dwNormalMap |= CNMAP_CHANNEL_RED;
-    //                }
-    //                else if (wcschr(pValue, L'g'))
-    //                {
-    //                    dwNormalMap |= CNMAP_CHANNEL_GREEN;
-    //                }
-    //                else if (wcschr(pValue, L'b'))
-    //                {
-    //                    dwNormalMap |= CNMAP_CHANNEL_BLUE;
-    //                }
-    //                else if (wcschr(pValue, L'a'))
-    //                {
-    //                    dwNormalMap |= CNMAP_CHANNEL_ALPHA;
-    //                }
-    //                else
-    //                {
-    //                    wprintf(L"Invalid value specified for -nmap (%ls), missing l, r, g, b, or a\n\n", pValue);
-    //                    return 1;
-    //                }
-
-    //                if (wcschr(pValue, L'm'))
-    //                {
-    //                    dwNormalMap |= CNMAP_MIRROR;
-    //                }
-    //                else
-    //                {
-    //                    if (wcschr(pValue, L'u'))
-    //                    {
-    //                        dwNormalMap |= CNMAP_MIRROR_U;
-    //                    }
-    //                    if (wcschr(pValue, L'v'))
-    //                    {
-    //                        dwNormalMap |= CNMAP_MIRROR_V;
-    //                    }
-    //                }
-
-    //                if (wcschr(pValue, L'i'))
-    //                {
-    //                    dwNormalMap |= CNMAP_INVERT_SIGN;
-    //                }
-
-    //                if (wcschr(pValue, L'o'))
-    //                {
-    //                    dwNormalMap |= CNMAP_COMPUTE_OCCLUSION;
-    //                }
-    //            }
-    //            break;
-
-    //        case OPT_NORMAL_MAP_AMPLITUDE:
-    //            if (!dwNormalMap)
-    //            {
-    //                wprintf(L"-nmapamp requires -nmap\n\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (swscanf_s(pValue, L"%f", &nmapAmplitude) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -nmapamp (%ls)\n\n", pValue);
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (nmapAmplitude < 0.f)
-    //            {
-    //                wprintf(L"Normal map amplitude must be positive (%ls)\n\n", pValue);
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_GPU:
-    //            if (swscanf_s(pValue, L"%d", &adapter) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -gpu (%ls)\n\n", pValue);
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (adapter < 0)
-    //            {
-    //                wprintf(L"Invalid adapter index (%ls)\n\n", pValue);
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_FEATURE_LEVEL:
-    //            maxSize = LookupByName(pValue, g_pFeatureLevels);
-    //            if (!maxSize)
-    //            {
-    //                wprintf(L"Invalid value specified with -fl (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_ALPHA_THRESHOLD:
-    //            if (swscanf_s(pValue, L"%f", &alphaThreshold) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -at (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (alphaThreshold < 0.f)
-    //            {
-    //                wprintf(L"-at (%ls) parameter must be positive\n", pValue);
-    //                wprintf(L"\n");
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_ALPHA_WEIGHT:
-    //            if (swscanf_s(pValue, L"%f", &alphaWeight) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -aw (%ls)\n", pValue);
-    //                wprintf(L"\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (alphaWeight < 0.f)
-    //            {
-    //                wprintf(L"-aw (%ls) parameter must be positive\n", pValue);
-    //                wprintf(L"\n");
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_BC_COMPRESS:
-    //            {
-    //                dwCompress = TEX_COMPRESS_DEFAULT;
-
-    //                bool found = false;
-    //                if (wcschr(pValue, L'u'))
-    //                {
-    //                    dwCompress |= TEX_COMPRESS_UNIFORM;
-    //                    found = true;
-    //                }
-
-    //                if (wcschr(pValue, L'd'))
-    //                {
-    //                    dwCompress |= TEX_COMPRESS_DITHER;
-    //                    found = true;
-    //                }
-
-    //                if (wcschr(pValue, L'q'))
-    //                {
-    //                    dwCompress |= TEX_COMPRESS_BC7_QUICK;
-    //                    found = true;
-    //                }
-
-    //                if (wcschr(pValue, L'x'))
-    //                {
-    //                    dwCompress |= TEX_COMPRESS_BC7_USE_3SUBSETS;
-    //                    found = true;
-    //                }
-
-    //                if ((dwCompress & (TEX_COMPRESS_BC7_QUICK | TEX_COMPRESS_BC7_USE_3SUBSETS)) == (TEX_COMPRESS_BC7_QUICK | TEX_COMPRESS_BC7_USE_3SUBSETS))
-    //                {
-    //                    wprintf(L"Can't use -bc x (max) and -bc q (quick) at same time\n\n");
-    //                    PrintUsage();
-    //                    return 1;
-    //                }
-
-    //                if (!found)
-    //                {
-    //                    wprintf(L"Invalid value specified for -bc (%ls), missing d, u, q, or x\n\n", pValue);
-    //                    return 1;
-    //                }
-    //            }
-    //            break;
-
-    //        case OPT_WIC_QUALITY:
-    //            if (swscanf_s(pValue, L"%f", &wicQuality) != 1
-    //                || (wicQuality < 0.f)
-    //                || (wicQuality > 1.f))
-    //            {
-    //                wprintf(L"Invalid value specified with -wicq (%ls)\n", pValue);
-    //                printf("\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_COLORKEY:
-    //            if (swscanf_s(pValue, L"%x", &colorKey) != 1)
-    //            {
-    //                printf("Invalid value specified with -c (%ls)\n", pValue);
-    //                printf("\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            colorKey &= 0xFFFFFF;
-    //            break;
-
-    //        case OPT_X2_BIAS:
-    //            dwConvert |= TEX_FILTER_FLOAT_X2BIAS;
-    //            break;
-
-    //        case OPT_USE_DX10:
-    //            if (dwOptions & (uint64_t(1) << OPT_USE_DX9))
-    //            {
-    //                wprintf(L"Can't use -dx9 and -dx10 at same time\n\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_USE_DX9:
-    //            if (dwOptions & (uint64_t(1) << OPT_USE_DX10))
-    //            {
-    //                wprintf(L"Can't use -dx9 and -dx10 at same time\n\n");
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_RECURSIVE:
-    //            if (*pValue)
-    //            {
-    //                // This option takes 'flatten' or 'keep' with ':' syntax
-    //                if (!_wcsicmp(pValue, L"keep"))
-    //                {
-    //                    keepRecursiveDirs = true;
-    //                }
-    //                else if (_wcsicmp(pValue, L"flatten") != 0)
-    //                {
-    //                    wprintf(L"For recursive use -r, -r:flatten, or -r:keep\n\n");
-    //                    PrintUsage();
-    //                    return 1;
-    //                }
-    //            }
-    //            break;
-
-    //        case OPT_FILELIST:
-    //            {
-    //                std::filesystem::path path(pValue);
-    //                std::wifstream inFile(path.make_preferred().c_str());
-    //                if (!inFile)
-    //                {
-    //                    wprintf(L"Error opening -flist file %ls\n", pValue);
-    //                    return 1;
-    //                }
-
-    //                inFile.imbue(std::locale::classic());
-
-    //                ProcessFileList(inFile, conversion);
-    //            }
-    //            break;
-
-    //        case OPT_PAPER_WHITE_NITS:
-    //            if (swscanf_s(pValue, L"%f", &paperWhiteNits) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -nits (%ls)\n\n", pValue);
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (paperWhiteNits > 10000.f || paperWhiteNits <= 0.f)
-    //            {
-    //                wprintf(L"-nits (%ls) parameter must be between 0 and 10000\n\n", pValue);
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_PRESERVE_ALPHA_COVERAGE:
-    //            if (swscanf_s(pValue, L"%f", &preserveAlphaCoverageRef) != 1)
-    //            {
-    //                wprintf(L"Invalid value specified with -keepcoverage (%ls)\n\n", pValue);
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (preserveAlphaCoverageRef < 0.0f || preserveAlphaCoverageRef > 1.0f)
-    //            {
-    //                wprintf(L"-keepcoverage (%ls) parameter must be between 0.0 and 1.0\n\n", pValue);
-    //                return 1;
-    //            }
-    //            break;
-
-    //        case OPT_SWIZZLE:
-    //            if (!*pValue || wcslen(pValue) > 4)
-    //            {
-    //                wprintf(L"Invalid value specified with -swizzle (%ls)\n\n", pValue);
-    //                PrintUsage();
-    //                return 1;
-    //            }
-    //            else if (!ParseSwizzleMask(pValue, swizzleElements, zeroElements, oneElements))
-    //            {
-    //                wprintf(L"-swizzle requires a 1 to 4 character mask composed of these letters: r, g, b, a, x, y, w, z, 0, 1\n");
-    //                return 1;
-    //            }
-    //            break;
-    //        }
-    //    }
-    //    else if (wcspbrk(pArg, L"?*") != nullptr)
-    //    {
-    //        const size_t count = conversion.size();
-    //        std::filesystem::path path(pArg);
-    //        SearchForFiles(path.make_preferred().c_str(), conversion, (dwOptions & (uint64_t(1) << OPT_RECURSIVE)) != 0, nullptr);
-    //        if (conversion.size() <= count)
-    //        {
-    //            wprintf(L"No matching files found for %ls\n", pArg);
-    //            return 1;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        SConversion conv = {};
-    //        std::filesystem::path path(pArg);
-    //        wcscpy_s(conv.szSrc, path.make_preferred().c_str());
-    //        conversion.push_back(conv);
-    //    }
-    //}
-
-    if (conversion.empty())
-    {
-        PrintUsage();
-        return 0;
-    }
-
-    //if (~dwOptions & (uint64_t(1) << OPT_NOLOGO))
-    //    PrintLogo(false);
-
-    // Work out out filename prefix and suffix
-    //if (szOutputDir[0] && (std::filesystem::path::preferred_separator != szOutputDir[wcslen(szOutputDir) - 1]))
-    //{
-    //    wchar_t pSeparator[2] = { std::filesystem::path::preferred_separator, 0 };
-    //    wcscat_s(szOutputDir, MAX_PATH, pSeparator);
-    //}
-
-    //auto fileTypeName = LookupByValue(FileType, g_pSaveFileTypes);
-
-    //if (fileTypeName)
-    //{
-    //    wcscat_s(szSuffix, MAX_PATH, L".");
-    //    wcscat_s(szSuffix, MAX_PATH, fileTypeName);
-    //}
-    //else
-    //{
-    //    wcscat_s(szSuffix, MAX_PATH, L".unknown");
-    //}
 
     if (FileType != CODEC_DDS)
     {
@@ -2017,7 +1427,7 @@ int Convert(
         if (!image)
         {
             wprintf(L"\nERROR: Memory allocation failed\n");
-            return 1;
+            return 2;
         }
 
         if (_wcsicmp(ext, L".dds") == 0)
@@ -2176,7 +1586,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 3;
             }
 
             hr = ConvertToSinglePlane(img, nimg, info, *timage);
@@ -2218,7 +1628,7 @@ int Convert(
                     if (!timage)
                     {
                         wprintf(L"\nERROR: Memory allocation failed\n");
-                        return 1;
+                        return 4;
                     }
 
                     // If we started with < 4x4 then no need to generate mips
@@ -2237,7 +1647,7 @@ int Convert(
                     {
                         wprintf(L" FAILED [BC non-multiple-of-4 fixup] (%08X%ls)\n",
                             static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                        return 1;
+                        return 5;
                     }
 
                     if (mdata.dimension == TEX_DIMENSION_TEXTURE3D)
@@ -2280,7 +1690,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 6;
             }
 
             hr = Decompress(img, nimg, info, DXGI_FORMAT_UNKNOWN /* picks good default */, *timage);
@@ -2338,7 +1748,7 @@ int Convert(
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
-                    return 1;
+                    return 7;
                 }
 
                 hr = PremultiplyAlpha(img, nimg, info, TEX_PMALPHA_REVERSE | dwSRGB, *timage);
@@ -2373,7 +1783,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 8;
             }
 
             TEX_FR_FLAGS dwFlags = TEX_FR_ROTATE0;
@@ -2390,7 +1800,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [fliprotate] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 9;
             }
 
             auto& tinfo = timage->GetMetadata();
@@ -2439,14 +1849,14 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 10;
             }
 
             hr = Resize(image->GetImages(), image->GetImageCount(), image->GetMetadata(), twidth, theight, dwFilter | dwFilterOpts, *timage);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [resize] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 11;
             }
 
             auto& tinfo = timage->GetMetadata();
@@ -2487,7 +1897,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 12;
             }
 
             const XMVECTOR zc = XMVectorSelectControl(zeroElements[0], zeroElements[1], zeroElements[2], zeroElements[3]);
@@ -2509,7 +1919,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [swizzle] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 13;
             }
 
         #ifndef NDEBUG
@@ -2538,7 +1948,7 @@ int Convert(
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
-                    return 1;
+                    return 14;
                 }
 
                 hr = Convert(image->GetImages(), image->GetImageCount(), image->GetMetadata(), DXGI_FORMAT_R16G16B16A16_FLOAT,
@@ -2546,7 +1956,7 @@ int Convert(
                 if (FAILED(hr))
                 {
                     wprintf(L" FAILED [convert] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                    return 1;
+                    return 15;
                 }
 
             #ifndef NDEBUG
@@ -2572,7 +1982,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 16;
             }
 
             switch (dwRotateColor)
@@ -2779,7 +2189,7 @@ int Convert(
             {
                 wprintf(L" FAILED [rotate color apply] (%08X%ls)\n",
                     static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 17;
             }
 
         #ifndef NDEBUG
@@ -2806,7 +2216,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 18;
             }
 
             // Compute max luminosity across all images
@@ -2830,7 +2240,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [tonemap maxlum] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 19;
             }
 
             // Reinhard et al, "Photographic Tone Reproduction for Digital Images"
@@ -2859,7 +2269,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [tonemap apply] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 20;
             }
 
         #ifndef NDEBUG
@@ -2886,7 +2296,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 21;
             }
 
             DXGI_FORMAT nmfmt = tformat;
@@ -2914,7 +2324,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [normalmap] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 22;
             }
 
             auto& tinfo = timage->GetMetadata();
@@ -2939,7 +2349,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 23;
             }
 
             hr = Convert(image->GetImages(), image->GetImageCount(), image->GetMetadata(), tformat,
@@ -2947,7 +2357,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [convert] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 24;
             }
 
             auto& tinfo = timage->GetMetadata();
@@ -2975,7 +2385,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 25;
             }
 
             XMVECTOR colorKeyValue = XMLoadColor(reinterpret_cast<const XMCOLOR*>(&colorKey));
@@ -3006,7 +2416,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [colorkey] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 26;
             }
 
         #ifndef NDEBUG
@@ -3033,7 +2443,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 27;
             }
 
             hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
@@ -3055,7 +2465,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [inverty] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 28;
             }
 
         #ifndef NDEBUG
@@ -3082,7 +2492,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 29;
             }
 
             bool isunorm = (FormatDataType(info.format) == FORMAT_TYPE_UNORM) != 0;
@@ -3116,7 +2526,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [reconstructz] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 30;
             }
 
         #ifndef NDEBUG
@@ -3167,7 +2577,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 31;
             }
 
             TexMetadata mdata = info;
@@ -3177,7 +2587,7 @@ int Convert(
             {
                 wprintf(L" FAILED [copy to single level] (%08X%ls)\n",
                     static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 32;
             }
 
             if (info.dimension == TEX_DIMENSION_TEXTURE3D)
@@ -3190,7 +2600,7 @@ int Convert(
                     {
                         wprintf(L" FAILED [copy to single level] (%08X%ls)\n",
                             static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                        return 1;
+                        return 33;
                     }
                 }
             }
@@ -3203,7 +2613,7 @@ int Convert(
                     if (FAILED(hr))
                     {
                         wprintf(L" FAILED [copy to single level] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                        return 1;
+                        return 34;
                     }
                 }
             }
@@ -3220,7 +2630,7 @@ int Convert(
                 if (FAILED(hr))
                 {
                     wprintf(L" FAILED [copy compressed to single level] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                    return 1;
+                    return 35;
                 }
 
                 if (mdata.dimension == TEX_DIMENSION_TEXTURE3D)
@@ -3258,7 +2668,7 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 36;
             }
 
             if (info.dimension == TEX_DIMENSION_TEXTURE3D)
@@ -3272,7 +2682,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [mipmaps] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 37;
             }
 
             auto& tinfo = timage->GetMetadata();
@@ -3297,14 +2707,14 @@ int Convert(
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
-                return 1;
+                return 38;
             }
 
             hr = timage->Initialize(image->GetMetadata());
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [keepcoverage] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
+                return 39;
             }
 
             const size_t items = image->GetMetadata().arraySize;
@@ -3317,7 +2727,7 @@ int Convert(
                 if (FAILED(hr))
                 {
                     wprintf(L" FAILED [keepcoverage] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                    return 1;
+                    return 40;
                 }
             }
 
@@ -3356,7 +2766,7 @@ int Convert(
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
-                    return 1;
+                    return 41;
                 }
 
                 hr = PremultiplyAlpha(img, nimg, info, TEX_PMALPHA_DEFAULT | dwSRGB, *timage);
@@ -3419,7 +2829,7 @@ int Convert(
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
-                    return 1;
+                    return 42;
                 }
 
                 bool bc6hbc7 = false;
