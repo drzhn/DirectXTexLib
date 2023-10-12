@@ -4,9 +4,9 @@
 #include "Blob.h"
 
 #include <cstring>
+#include <cstdlib>
 
-#include "Winerror.h"
-
+#include "winerror.h"
 
 Blob& Blob::operator= (Blob&& moveFrom) noexcept
 {

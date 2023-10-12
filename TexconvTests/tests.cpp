@@ -7,24 +7,45 @@ int main()
 {
     AssetConversion::TextureConversionParams params;
 
-    params.format = DXGI_FORMAT_BC1_UNORM;
-
     const uint64_t options =
         (1ull << OPT_MIPLEVELS) |
         (1ull << OPT_FORMAT) |
-        (1ull << OPT_FIT_POWEROF2);
-
-    AssetConversion::TextureMetadata metadata;
-    Blob blob;
+        (1ull << OPT_FIT_POWEROF2) |
+        (1ull << OPT_USE_DX10);
 
 
-    AssetConversion::Convert(params, options, "pngTexture.png", metadata, blob);
+    {
+        params.format = DXGI_FORMAT_BC1_UNORM;
 
-    std::ofstream fout;
-    fout.open("pngTexture.dds", std::ios::binary | std::ios::out);
+        AssetConversion::TextureMetadata metadata;
+        Blob blob;
 
-    fout.write(static_cast<char*>(blob.GetBufferPointer()), blob.GetBufferSize());
+        AssetConversion::Convert(params, options, "pngTexture.png", metadata, blob);
+        bool isHDR = AssetConversion::IsHDR("pngTexture.png");
+        std::ofstream fout;
+        fout.open("pngTexture.dds", std::ios::binary | std::ios::out);
 
-    fout.close();
+        fout.write(static_cast<char*>(blob.GetBufferPointer()), blob.GetBufferSize());
+
+        fout.close();
+    }
+
+    {
+        params.format = DXGI_FORMAT_BC6H_UF16;
+
+        AssetConversion::TextureMetadata metadata;
+        Blob blob;
+
+        AssetConversion::Convert(params, options, "hdrTexture.hdr", metadata, blob);
+        bool isHDR = AssetConversion::IsHDR("hdrTexture.hdr");
+
+        std::ofstream fout;
+        fout.open("hdrTexture.dds", std::ios::binary | std::ios::out);
+
+        fout.write(static_cast<char*>(blob.GetBufferPointer()), blob.GetBufferSize());
+
+        fout.close();
+    }
+
     return 0;
 }

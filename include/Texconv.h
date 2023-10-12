@@ -6,7 +6,7 @@
 
 class Blob;
 
-namespace 
+namespace
 {
     enum OPTIONS : uint64_t
     {
@@ -75,12 +75,12 @@ namespace AssetConversion
 {
     struct TextureMetadata
     {
-        size_t          width;
-        size_t          height;     // Should be 1 for 1D textures
-        size_t          depth;      // Should be 1 for 1D or 2D textures
-        size_t          arraySize;  // For cubemap, this is a multiple of 6
-        size_t          mipLevels;
-        DXGI_FORMAT     format;
+        size_t width;
+        size_t height; // Should be 1 for 1D textures
+        size_t depth; // Should be 1 for 1D or 2D textures
+        size_t arraySize; // For cubemap, this is a multiple of 6
+        size_t mipLevels;
+        DXGI_FORMAT format;
     };
 
     struct TextureConversionParams
@@ -98,5 +98,7 @@ namespace AssetConversion
         TextureMetadata& outMetadata,
         Blob& outBlob
     );
+
+    bool IsHDR(const char* filePath);
 }
 #endif // TEXCONV_H

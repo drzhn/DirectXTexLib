@@ -3537,6 +3537,16 @@ int Convert(
             const size_t nimg = image->GetImageCount();
 
             PrintInfo(info);
+
+            outMetadata = {
+                .width = info.width,
+                .height = info.height,
+                .depth = info.depth,
+                .arraySize = info.arraySize,
+                .mipLevels = info.mipLevels,
+                .format = info.format
+            };
+
             wprintf(L"\n");
 
             // Figure out dest filename
@@ -3764,4 +3774,30 @@ int Convert(
     return retVal;
 }
 
+bool IsHDR(const char* filePath)
+{
+    FILE* f;
+    bool res = false;
+    const char* test1 = "#?RADIANCE";
+    const char* test2 = "#?RGBE";
+    if (fopen_s(&f, filePath, "r") == 0)
+    {
+        auto CheckHdr = [](const char* testStr, FILE* file)
+        {
+            char buf[16];
+
+            size_t len = strlen(testStr);
+            fseek(file, 0, 0);
+            fread_s(buf, len, 1, len, file);
+            return strncmp(testStr, buf, len) == 0;
+        };
+
+        if (CheckHdr(test1, f) || CheckHdr(test2, f))
+        {
+            res = true;
+        }
+        fclose(f);
+    }
+    return res;
+}
 }
