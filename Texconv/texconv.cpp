@@ -94,73 +94,73 @@ namespace
         wchar_t szFolder[MAX_PATH];
     };
 
-    template<typename T>
+    template <typename T>
     struct SValue
     {
-        const wchar_t*  name;
-        T               value;
+        const wchar_t* name;
+        T value;
     };
 
     const SValue<uint64_t> g_pOptions[] =
     {
-        { L"r",             OPT_RECURSIVE },
-        { L"flist",         OPT_FILELIST },
-        { L"w",             OPT_WIDTH },
-        { L"h",             OPT_HEIGHT },
-        { L"m",             OPT_MIPLEVELS },
-        { L"f",             OPT_FORMAT },
-        { L"if",            OPT_FILTER },
-        { L"srgbi",         OPT_SRGBI },
-        { L"srgbo",         OPT_SRGBO },
-        { L"srgb",          OPT_SRGB },
-        { L"px",            OPT_PREFIX },
-        { L"sx",            OPT_SUFFIX },
-        { L"o",             OPT_OUTPUTDIR },
-        { L"l",             OPT_TOLOWER },
-        { L"y",             OPT_OVERWRITE },
-        { L"ft",            OPT_FILETYPE },
-        { L"hflip",         OPT_HFLIP },
-        { L"vflip",         OPT_VFLIP },
-        { L"dword",         OPT_DDS_DWORD_ALIGN },
-        { L"badtails",      OPT_DDS_BAD_DXTN_TAILS },
-        { L"dx10",          OPT_USE_DX10 },
-        { L"dx9",           OPT_USE_DX9 },
-        { L"tga20",         OPT_TGA20 },
-        { L"wicq",          OPT_WIC_QUALITY },
-        { L"wiclossless",   OPT_WIC_LOSSLESS },
-        { L"wicmulti",      OPT_WIC_MULTIFRAME },
-        { L"nologo",        OPT_NOLOGO },
-        { L"timing",        OPT_TIMING },
-        { L"sepalpha",      OPT_SEPALPHA },
-        { L"keepcoverage",  OPT_PRESERVE_ALPHA_COVERAGE },
-        { L"nowic",         OPT_NO_WIC },
-        { L"tu",            OPT_TYPELESS_UNORM },
-        { L"tf",            OPT_TYPELESS_FLOAT },
-        { L"pmalpha",       OPT_PREMUL_ALPHA },
-        { L"alpha",         OPT_DEMUL_ALPHA },
-        { L"xlum",          OPT_EXPAND_LUMINANCE },
-        { L"wrap",          OPT_TA_WRAP },
-        { L"mirror",        OPT_TA_MIRROR },
-        { L"singleproc",    OPT_FORCE_SINGLEPROC },
-        { L"gpu",           OPT_GPU },
-        { L"nogpu",         OPT_NOGPU },
-        { L"fl",            OPT_FEATURE_LEVEL },
-        { L"pow2",          OPT_FIT_POWEROF2 },
-        { L"at",            OPT_ALPHA_THRESHOLD },
-        { L"aw",            OPT_ALPHA_WEIGHT },
-        { L"nmap",          OPT_NORMAL_MAP },
-        { L"nmapamp",       OPT_NORMAL_MAP_AMPLITUDE },
-        { L"bc",            OPT_BC_COMPRESS },
-        { L"c",             OPT_COLORKEY },
-        { L"tonemap",       OPT_TONEMAP },
-        { L"x2bias",        OPT_X2_BIAS },
-        { L"inverty",       OPT_INVERT_Y },
-        { L"reconstructz",  OPT_RECONSTRUCT_Z },
-        { L"rotatecolor",   OPT_ROTATE_COLOR },
-        { L"nits",          OPT_PAPER_WHITE_NITS },
-        { L"fixbc4x4",      OPT_BCNONMULT4FIX },
-        { L"swizzle",       OPT_SWIZZLE },
-        { nullptr,          0 }
+        {L"r", OPT_RECURSIVE},
+        {L"flist", OPT_FILELIST},
+        {L"w", OPT_WIDTH},
+        {L"h", OPT_HEIGHT},
+        {L"m", OPT_MIPLEVELS},
+        {L"f", OPT_FORMAT},
+        {L"if", OPT_FILTER},
+        {L"srgbi", OPT_SRGBI},
+        {L"srgbo", OPT_SRGBO},
+        {L"srgb", OPT_SRGB},
+        {L"px", OPT_PREFIX},
+        {L"sx", OPT_SUFFIX},
+        {L"o", OPT_OUTPUTDIR},
+        {L"l", OPT_TOLOWER},
+        {L"y", OPT_OVERWRITE},
+        {L"ft", OPT_FILETYPE},
+        {L"hflip", OPT_HFLIP},
+        {L"vflip", OPT_VFLIP},
+        {L"dword", OPT_DDS_DWORD_ALIGN},
+        {L"badtails", OPT_DDS_BAD_DXTN_TAILS},
+        {L"dx10", OPT_USE_DX10},
+        {L"dx9", OPT_USE_DX9},
+        {L"tga20", OPT_TGA20},
+        {L"wicq", OPT_WIC_QUALITY},
+        {L"wiclossless", OPT_WIC_LOSSLESS},
+        {L"wicmulti", OPT_WIC_MULTIFRAME},
+        {L"nologo", OPT_NOLOGO},
+        {L"timing", OPT_TIMING},
+        {L"sepalpha", OPT_SEPALPHA},
+        {L"keepcoverage", OPT_PRESERVE_ALPHA_COVERAGE},
+        {L"nowic", OPT_NO_WIC},
+        {L"tu", OPT_TYPELESS_UNORM},
+        {L"tf", OPT_TYPELESS_FLOAT},
+        {L"pmalpha", OPT_PREMUL_ALPHA},
+        {L"alpha", OPT_DEMUL_ALPHA},
+        {L"xlum", OPT_EXPAND_LUMINANCE},
+        {L"wrap", OPT_TA_WRAP},
+        {L"mirror", OPT_TA_MIRROR},
+        {L"singleproc", OPT_FORCE_SINGLEPROC},
+        {L"gpu", OPT_GPU},
+        {L"nogpu", OPT_NOGPU},
+        {L"fl", OPT_FEATURE_LEVEL},
+        {L"pow2", OPT_FIT_POWEROF2},
+        {L"at", OPT_ALPHA_THRESHOLD},
+        {L"aw", OPT_ALPHA_WEIGHT},
+        {L"nmap", OPT_NORMAL_MAP},
+        {L"nmapamp", OPT_NORMAL_MAP_AMPLITUDE},
+        {L"bc", OPT_BC_COMPRESS},
+        {L"c", OPT_COLORKEY},
+        {L"tonemap", OPT_TONEMAP},
+        {L"x2bias", OPT_X2_BIAS},
+        {L"inverty", OPT_INVERT_Y},
+        {L"reconstructz", OPT_RECONSTRUCT_Z},
+        {L"rotatecolor", OPT_ROTATE_COLOR},
+        {L"nits", OPT_PAPER_WHITE_NITS},
+        {L"fixbc4x4", OPT_BCNONMULT4FIX},
+        {L"swizzle", OPT_SWIZZLE},
+        {nullptr, 0}
     };
 
 #define DEFFMT(fmt) { L## #fmt, DXGI_FORMAT_ ## fmt }
@@ -249,28 +249,28 @@ namespace
         // No support for legacy paletted video formats (AI44, IA44, P8, A8P8)
         DEFFMT(B4G4R4A4_UNORM),
 
-        { nullptr, DXGI_FORMAT_UNKNOWN }
+        {nullptr, DXGI_FORMAT_UNKNOWN}
     };
 
     const SValue<uint32_t> g_pFormatAliases[] =
     {
-        { L"DXT1", DXGI_FORMAT_BC1_UNORM },
-        { L"DXT2", DXGI_FORMAT_BC2_UNORM },
-        { L"DXT3", DXGI_FORMAT_BC2_UNORM },
-        { L"DXT4", DXGI_FORMAT_BC3_UNORM },
-        { L"DXT5", DXGI_FORMAT_BC3_UNORM },
+        {L"DXT1", DXGI_FORMAT_BC1_UNORM},
+        {L"DXT2", DXGI_FORMAT_BC2_UNORM},
+        {L"DXT3", DXGI_FORMAT_BC2_UNORM},
+        {L"DXT4", DXGI_FORMAT_BC3_UNORM},
+        {L"DXT5", DXGI_FORMAT_BC3_UNORM},
 
-        { L"RGBA", DXGI_FORMAT_R8G8B8A8_UNORM },
-        { L"BGRA", DXGI_FORMAT_B8G8R8A8_UNORM },
-        { L"BGR",  DXGI_FORMAT_B8G8R8X8_UNORM },
+        {L"RGBA", DXGI_FORMAT_R8G8B8A8_UNORM},
+        {L"BGRA", DXGI_FORMAT_B8G8R8A8_UNORM},
+        {L"BGR", DXGI_FORMAT_B8G8R8X8_UNORM},
 
-        { L"FP16", DXGI_FORMAT_R16G16B16A16_FLOAT },
-        { L"FP32", DXGI_FORMAT_R32G32B32A32_FLOAT },
+        {L"FP16", DXGI_FORMAT_R16G16B16A16_FLOAT},
+        {L"FP32", DXGI_FORMAT_R32G32B32A32_FLOAT},
 
-        { L"BPTC", DXGI_FORMAT_BC7_UNORM },
-        { L"BPTC_FLOAT", DXGI_FORMAT_BC6H_UF16 },
+        {L"BPTC", DXGI_FORMAT_BC7_UNORM},
+        {L"BPTC_FLOAT", DXGI_FORMAT_BC6H_UF16},
 
-        { nullptr, DXGI_FORMAT_UNKNOWN }
+        {nullptr, DXGI_FORMAT_UNKNOWN}
     };
 
     const SValue<uint32_t> g_pReadOnlyFormats[] =
@@ -315,47 +315,47 @@ namespace
         DEFFMT(NV11),
 
         // DXGI 1.3 formats
-        { L"P208", DXGI_FORMAT(130) },
-        { L"V208", DXGI_FORMAT(131) },
-        { L"V408", DXGI_FORMAT(132) },
+        {L"P208", DXGI_FORMAT(130)},
+        {L"V208", DXGI_FORMAT(131)},
+        {L"V408", DXGI_FORMAT(132)},
 
-        { nullptr, DXGI_FORMAT_UNKNOWN }
+        {nullptr, DXGI_FORMAT_UNKNOWN}
     };
 
     const SValue<uint32_t> g_pFilters[] =
     {
-        { L"POINT",                     TEX_FILTER_POINT },
-        { L"LINEAR",                    TEX_FILTER_LINEAR },
-        { L"CUBIC",                     TEX_FILTER_CUBIC },
-        { L"FANT",                      TEX_FILTER_FANT },
-        { L"BOX",                       TEX_FILTER_BOX },
-        { L"TRIANGLE",                  TEX_FILTER_TRIANGLE },
-        { L"POINT_DITHER",              TEX_FILTER_POINT | TEX_FILTER_DITHER },
-        { L"LINEAR_DITHER",             TEX_FILTER_LINEAR | TEX_FILTER_DITHER },
-        { L"CUBIC_DITHER",              TEX_FILTER_CUBIC | TEX_FILTER_DITHER },
-        { L"FANT_DITHER",               TEX_FILTER_FANT | TEX_FILTER_DITHER },
-        { L"BOX_DITHER",                TEX_FILTER_BOX | TEX_FILTER_DITHER },
-        { L"TRIANGLE_DITHER",           TEX_FILTER_TRIANGLE | TEX_FILTER_DITHER },
-        { L"POINT_DITHER_DIFFUSION",    TEX_FILTER_POINT | TEX_FILTER_DITHER_DIFFUSION },
-        { L"LINEAR_DITHER_DIFFUSION",   TEX_FILTER_LINEAR | TEX_FILTER_DITHER_DIFFUSION },
-        { L"CUBIC_DITHER_DIFFUSION",    TEX_FILTER_CUBIC | TEX_FILTER_DITHER_DIFFUSION },
-        { L"FANT_DITHER_DIFFUSION",     TEX_FILTER_FANT | TEX_FILTER_DITHER_DIFFUSION },
-        { L"BOX_DITHER_DIFFUSION",      TEX_FILTER_BOX | TEX_FILTER_DITHER_DIFFUSION },
-        { L"TRIANGLE_DITHER_DIFFUSION", TEX_FILTER_TRIANGLE | TEX_FILTER_DITHER_DIFFUSION },
-        { nullptr,                      TEX_FILTER_DEFAULT                              }
+        {L"POINT", TEX_FILTER_POINT},
+        {L"LINEAR", TEX_FILTER_LINEAR},
+        {L"CUBIC", TEX_FILTER_CUBIC},
+        {L"FANT", TEX_FILTER_FANT},
+        {L"BOX", TEX_FILTER_BOX},
+        {L"TRIANGLE", TEX_FILTER_TRIANGLE},
+        {L"POINT_DITHER", TEX_FILTER_POINT | TEX_FILTER_DITHER},
+        {L"LINEAR_DITHER", TEX_FILTER_LINEAR | TEX_FILTER_DITHER},
+        {L"CUBIC_DITHER", TEX_FILTER_CUBIC | TEX_FILTER_DITHER},
+        {L"FANT_DITHER", TEX_FILTER_FANT | TEX_FILTER_DITHER},
+        {L"BOX_DITHER", TEX_FILTER_BOX | TEX_FILTER_DITHER},
+        {L"TRIANGLE_DITHER", TEX_FILTER_TRIANGLE | TEX_FILTER_DITHER},
+        {L"POINT_DITHER_DIFFUSION", TEX_FILTER_POINT | TEX_FILTER_DITHER_DIFFUSION},
+        {L"LINEAR_DITHER_DIFFUSION", TEX_FILTER_LINEAR | TEX_FILTER_DITHER_DIFFUSION},
+        {L"CUBIC_DITHER_DIFFUSION", TEX_FILTER_CUBIC | TEX_FILTER_DITHER_DIFFUSION},
+        {L"FANT_DITHER_DIFFUSION", TEX_FILTER_FANT | TEX_FILTER_DITHER_DIFFUSION},
+        {L"BOX_DITHER_DIFFUSION", TEX_FILTER_BOX | TEX_FILTER_DITHER_DIFFUSION},
+        {L"TRIANGLE_DITHER_DIFFUSION", TEX_FILTER_TRIANGLE | TEX_FILTER_DITHER_DIFFUSION},
+        {nullptr, TEX_FILTER_DEFAULT}
     };
 
     const SValue<uint32_t> g_pRotateColor[] =
     {
-        { L"709to2020",     ROTATE_709_TO_2020 },
-        { L"2020to709",     ROTATE_2020_TO_709 },
-        { L"709toHDR10",    ROTATE_709_TO_HDR10 },
-        { L"HDR10to709",    ROTATE_HDR10_TO_709 },
-        { L"P3D65to2020",   ROTATE_P3D65_TO_2020 },
-        { L"P3D65toHDR10",  ROTATE_P3D65_TO_HDR10 },
-        { L"709toP3D65",    ROTATE_709_TO_P3D65 },
-        { L"P3D65to709",    ROTATE_P3D65_TO_709 },
-        { nullptr, 0 },
+        {L"709to2020", ROTATE_709_TO_2020},
+        {L"2020to709", ROTATE_2020_TO_709},
+        {L"709toHDR10", ROTATE_709_TO_HDR10},
+        {L"HDR10to709", ROTATE_HDR10_TO_709},
+        {L"P3D65to2020", ROTATE_P3D65_TO_2020},
+        {L"P3D65toHDR10", ROTATE_P3D65_TO_HDR10},
+        {L"709toP3D65", ROTATE_709_TO_P3D65},
+        {L"P3D65to709", ROTATE_P3D65_TO_709},
+        {nullptr, 0},
     };
 
 #define CODEC_DDS 0xFFFF0001
@@ -370,43 +370,43 @@ namespace
 #define CODEC_EXR 0xFFFF0008
 #endif
 
-    const SValue<uint32_t> g_pSaveFileTypes[] =   // valid formats to write to
+    const SValue<uint32_t> g_pSaveFileTypes[] = // valid formats to write to
     {
-        { L"bmp",   WIC_CODEC_BMP  },
-        { L"jpg",   WIC_CODEC_JPEG },
-        { L"jpeg",  WIC_CODEC_JPEG },
-        { L"png",   WIC_CODEC_PNG  },
-        { L"dds",   CODEC_DDS      },
-        { L"tga",   CODEC_TGA      },
-        { L"hdr",   CODEC_HDR      },
-        { L"tif",   WIC_CODEC_TIFF },
-        { L"tiff",  WIC_CODEC_TIFF },
-        { L"wdp",   WIC_CODEC_WMP  },
-        { L"hdp",   CODEC_HDP      },
-        { L"jxr",   CODEC_JXR      },
-        { L"ppm",   CODEC_PPM      },
-        { L"pfm",   CODEC_PFM      },
-    #ifdef USE_OPENEXR
+        {L"bmp", WIC_CODEC_BMP},
+        {L"jpg", WIC_CODEC_JPEG},
+        {L"jpeg", WIC_CODEC_JPEG},
+        {L"png", WIC_CODEC_PNG},
+        {L"dds", CODEC_DDS},
+        {L"tga", CODEC_TGA},
+        {L"hdr", CODEC_HDR},
+        {L"tif", WIC_CODEC_TIFF},
+        {L"tiff", WIC_CODEC_TIFF},
+        {L"wdp", WIC_CODEC_WMP},
+        {L"hdp", CODEC_HDP},
+        {L"jxr", CODEC_JXR},
+        {L"ppm", CODEC_PPM},
+        {L"pfm", CODEC_PFM},
+#ifdef USE_OPENEXR
         { L"exr",   CODEC_EXR      },
-    #endif
-        { L"heic",  WIC_CODEC_HEIF },
-        { L"heif",  WIC_CODEC_HEIF },
-        { nullptr,  CODEC_DDS      }
+#endif
+        {L"heic", WIC_CODEC_HEIF},
+        {L"heif", WIC_CODEC_HEIF},
+        {nullptr, CODEC_DDS}
     };
 
-    const SValue<uint32_t> g_pFeatureLevels[] =   // valid feature levels for -fl for maximimum size
+    const SValue<uint32_t> g_pFeatureLevels[] = // valid feature levels for -fl for maximimum size
     {
-        { L"9.1",  2048 },
-        { L"9.2",  2048 },
-        { L"9.3",  4096 },
-        { L"10.0", 8192 },
-        { L"10.1", 8192 },
-        { L"11.0", 16384 },
-        { L"11.1", 16384 },
-        { L"12.0", 16384 },
-        { L"12.1", 16384 },
-        { L"12.2", 16384 },
-        { nullptr, 0 },
+        {L"9.1", 2048},
+        {L"9.2", 2048},
+        {L"9.3", 4096},
+        {L"10.0", 8192},
+        {L"10.1", 8192},
+        {L"11.0", 16384},
+        {L"11.1", 16384},
+        {L"12.0", 16384},
+        {L"12.1", 16384},
+        {L"12.2", 16384},
+        {nullptr, 0},
     };
 }
 
@@ -448,7 +448,14 @@ namespace
 {
     inline HANDLE safe_handle(HANDLE h) noexcept { return (h == INVALID_HANDLE_VALUE) ? nullptr : h; }
 
-    struct find_closer { void operator()(HANDLE h) noexcept { assert(h != INVALID_HANDLE_VALUE); if (h) FindClose(h); } };
+    struct find_closer
+    {
+        void operator()(HANDLE h) noexcept
+        {
+            assert(h != INVALID_HANDLE_VALUE);
+            if (h) FindClose(h);
+        }
+    };
 
     using ScopedFindHandle = std::unique_ptr<void, find_closer>;
 
@@ -461,8 +468,8 @@ namespace
 #pragma prefast(disable : 26018, "Only used with static internal arrays")
 #endif
 
-    template<typename T>
-    T LookupByName(const wchar_t *pName, const SValue<T> *pArray)
+    template <typename T>
+    T LookupByName(const wchar_t* pName, const SValue<T>* pArray)
     {
         while (pArray->name)
         {
@@ -475,8 +482,8 @@ namespace
         return 0;
     }
 
-    template<typename T>
-    const wchar_t* LookupByValue(T value, const SValue<T> *pArray)
+    template <typename T>
+    const wchar_t* LookupByValue(T value, const SValue<T>* pArray)
     {
         while (pArray->name)
         {
@@ -494,9 +501,9 @@ namespace
         // Process files
         WIN32_FIND_DATAW findData = {};
         ScopedFindHandle hFile(safe_handle(FindFirstFileExW(path,
-            FindExInfoBasic, &findData,
-            FindExSearchNameMatch, nullptr,
-            FIND_FIRST_EX_LARGE_FETCH)));
+                                                            FindExInfoBasic, &findData,
+                                                            FindExSearchNameMatch, nullptr,
+                                                            FIND_FIRST_EX_LARGE_FETCH)));
         if (hFile)
         {
             for (;;)
@@ -533,9 +540,9 @@ namespace
             }
 
             hFile.reset(safe_handle(FindFirstFileExW(searchDir,
-                FindExInfoBasic, &findData,
-                FindExSearchLimitToDirectories, nullptr,
-                FIND_FIRST_EX_LARGE_FETCH)));
+                                                     FindExInfoBasic, &findData,
+                                                     FindExSearchLimitToDirectories, nullptr,
+                                                     FIND_FIRST_EX_LARGE_FETCH)));
             if (!hFile)
                 return;
 
@@ -547,8 +554,8 @@ namespace
                     {
                         wchar_t subdir[MAX_PATH] = {};
                         auto subfolder = (folder)
-                            ? (std::wstring(folder) + std::wstring(findData.cFileName) + std::filesystem::path::preferred_separator)
-                            : (std::wstring(findData.cFileName) + std::filesystem::path::preferred_separator);
+                                             ? (std::wstring(folder) + std::wstring(findData.cFileName) + std::filesystem::path::preferred_separator)
+                                             : (std::wstring(findData.cFileName) + std::filesystem::path::preferred_separator);
                         {
                             wchar_t drive[_MAX_DRIVE] = {};
                             wchar_t dir[_MAX_DIR] = {};
@@ -739,7 +746,7 @@ namespace
         wprintf(L")");
     }
 
-    void PrintList(size_t cch, const SValue<uint32_t> *pValue)
+    void PrintList(size_t cch, const SValue<uint32_t>* pValue)
     {
         while (pValue->name)
         {
@@ -795,22 +802,23 @@ namespace
         {
             wprintf(L"Microsoft (R) DirectX Texture Converter [DirectXTex] Version %ls\n", version);
             wprintf(L"Copyright (C) Microsoft Corp.\n");
-        #ifdef _DEBUG
+#ifdef _DEBUG
             wprintf(L"*** Debug build ***\n");
-        #endif
+#endif
             wprintf(L"\n");
         }
     }
 
     _Success_(return)
-        bool GetDXGIFactory(_Outptr_ IDXGIFactory1** pFactory)
+
+    bool GetDXGIFactory(_Outptr_ IDXGIFactory1** pFactory)
     {
         if (!pFactory)
             return false;
 
         *pFactory = nullptr;
 
-        typedef HRESULT(WINAPI* pfn_CreateDXGIFactory1)(REFIID riid, _Out_ void **ppFactory);
+        typedef HRESULT (WINAPI*pfn_CreateDXGIFactory1)(REFIID riid, _Out_ void** ppFactory);
 
         static pfn_CreateDXGIFactory1 s_CreateDXGIFactory1 = nullptr;
 
@@ -899,9 +907,9 @@ namespace
             L"   -nologo             suppress copyright message\n"
             L"   -timing             Display elapsed processing time\n"
             L"\n"
-        #ifdef _OPENMP
+#ifdef _OPENMP
             L"   -singleproc         Do not use multi-threaded compression\n"
-        #endif
+#endif
             L"   -gpu <adapter>      Select GPU for DirectCompute-based codecs (0 is default)\n"
             L"   -nogpu              Do not use DirectCompute-based codecs\n"
             L"\n"
@@ -948,8 +956,8 @@ namespace
 
             ComPtr<IDXGIAdapter> adapter;
             for (UINT adapterIndex = 0;
-                SUCCEEDED(dxgiFactory->EnumAdapters(adapterIndex, adapter.ReleaseAndGetAddressOf()));
-                ++adapterIndex)
+                 SUCCEEDED(dxgiFactory->EnumAdapters(adapterIndex, adapter.ReleaseAndGetAddressOf()));
+                 ++adapterIndex)
             {
                 DXGI_ADAPTER_DESC desc;
                 if (SUCCEEDED(adapter->GetDesc(&desc)))
@@ -967,8 +975,8 @@ namespace
         LPWSTR errorText = nullptr;
 
         const DWORD result = FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER,
-            nullptr, static_cast<DWORD>(hr),
-            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&errorText), 0, nullptr);
+                                            nullptr, static_cast<DWORD>(hr),
+                                            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&errorText), 0, nullptr);
 
         *desc = 0;
 
@@ -990,7 +998,8 @@ namespace
     }
 
     _Success_(return)
-        bool CreateDevice(int adapter, _Outptr_ ID3D11Device** pDevice)
+
+    bool CreateDevice(int adapter, _Outptr_ ID3D11Device** pDevice)
     {
         if (!pDevice)
             return false;
@@ -1018,9 +1027,9 @@ namespace
         };
 
         UINT createDeviceFlags = 0;
-    #ifdef _DEBUG
+#ifdef _DEBUG
         createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-    #endif
+#endif
 
         ComPtr<IDXGIAdapter> pAdapter;
         if (adapter >= 0)
@@ -1038,9 +1047,9 @@ namespace
 
         D3D_FEATURE_LEVEL fl;
         HRESULT hr = s_DynamicD3D11CreateDevice(pAdapter.Get(),
-            (pAdapter) ? D3D_DRIVER_TYPE_UNKNOWN : D3D_DRIVER_TYPE_HARDWARE,
-            nullptr, createDeviceFlags, featureLevels, static_cast<UINT>(std::size(featureLevels)),
-            D3D11_SDK_VERSION, pDevice, &fl, nullptr);
+                                                (pAdapter) ? D3D_DRIVER_TYPE_UNKNOWN : D3D_DRIVER_TYPE_HARDWARE,
+                                                nullptr, createDeviceFlags, featureLevels, static_cast<UINT>(std::size(featureLevels)),
+                                                D3D11_SDK_VERSION, pDevice, &fl, nullptr);
         if (SUCCEEDED(hr))
         {
             if (fl < D3D_FEATURE_LEVEL_11_0)
@@ -1076,7 +1085,7 @@ namespace
                     if (SUCCEEDED(hr))
                     {
                         wprintf(L"\n[Using DirectCompute %ls on \"%ls\"]\n",
-                            (fl >= D3D_FEATURE_LEVEL_11_0) ? L"5.0" : L"4.0", desc.Description);
+                                (fl >= D3D_FEATURE_LEVEL_11_0) ? L"5.0" : L"4.0", desc.Description);
                     }
                 }
             }
@@ -1166,7 +1175,7 @@ namespace
         return mipLevels;
     }
 
-    const XMVECTORF32 c_MaxNitsFor2084 = { { { 10000.0f, 10000.0f, 10000.0f, 1.f } } };
+    const XMVECTORF32 c_MaxNitsFor2084 = {{{10000.0f, 10000.0f, 10000.0f, 1.f}}};
 
     // HDTV to UHDTV (Rec.709 color primaries into Rec.2020)
     const XMMATRIX c_from709to2020 =
@@ -1174,49 +1183,49 @@ namespace
         0.6274040f, 0.0690970f, 0.0163916f, 0.f,
         0.3292820f, 0.9195400f, 0.0880132f, 0.f,
         0.0433136f, 0.0113612f, 0.8955950f, 0.f,
-        0.f,        0.f,        0.f,        1.f
+        0.f, 0.f, 0.f, 1.f
     };
 
     // UHDTV to HDTV
     const XMMATRIX c_from2020to709 =
     {
-        1.6604910f,  -0.1245505f, -0.0181508f, 0.f,
-        -0.5876411f,  1.1328999f, -0.1005789f, 0.f,
-        -0.0728499f, -0.0083494f,  1.1187297f, 0.f,
-        0.f,          0.f,         0.f,        1.f
+        1.6604910f, -0.1245505f, -0.0181508f, 0.f,
+        -0.5876411f, 1.1328999f, -0.1005789f, 0.f,
+        -0.0728499f, -0.0083494f, 1.1187297f, 0.f,
+        0.f, 0.f, 0.f, 1.f
     };
 
     // DCI-P3-D65 https://en.wikipedia.org/wiki/DCI-P3 to UHDTV (DCI-P3-D65 color primaries into Rec.2020)
     const XMMATRIX c_fromP3D65to2020 =
     {
         0.753845f, 0.0457456f, -0.00121055f, 0.f,
-        0.198593f, 0.941777f,   0.0176041f,  0.f,
-        0.047562f, 0.0124772f,  0.983607f,   0.f,
-        0.f,       0.f,         0.f,         1.f
+        0.198593f, 0.941777f, 0.0176041f, 0.f,
+        0.047562f, 0.0124772f, 0.983607f, 0.f,
+        0.f, 0.f, 0.f, 1.f
     };
 
     // HDTV to DCI-P3-D65 (a.k.a. Display P3 or P3D65)
     const XMMATRIX c_from709toP3D65 =
     {
         0.822461969f, 0.033194199f, 0.017082631f, 0.f,
-        0.1775380f,   0.9668058f,   0.0723974f,   0.f,
-        0.0000000f,   0.0000000f,   0.9105199f,   0.f,
-        0.f,          0.f,          0.f,          1.f
+        0.1775380f, 0.9668058f, 0.0723974f, 0.f,
+        0.0000000f, 0.0000000f, 0.9105199f, 0.f,
+        0.f, 0.f, 0.f, 1.f
     };
 
     // DCI-P3-D65 to HDTV
     const XMMATRIX c_fromP3D65to709 =
     {
-        1.224940176f,  -0.042056955f, -0.019637555f, 0.f,
-        -0.224940176f,  1.042056955f, -0.078636046f, 0.f,
-        0.0000000f,     0.0000000f,    1.098273600f, 0.f,
-        0.f,            0.f,           0.f,          1.f
+        1.224940176f, -0.042056955f, -0.019637555f, 0.f,
+        -0.224940176f, 1.042056955f, -0.078636046f, 0.f,
+        0.0000000f, 0.0000000f, 1.098273600f, 0.f,
+        0.f, 0.f, 0.f, 1.f
     };
 
     inline float LinearToST2084(float normalizedLinearValue)
     {
         const float ST2084 = pow((0.8359375f + 18.8515625f * pow(abs(normalizedLinearValue), 0.1593017578f)) / (1.0f + 18.6875f * pow(abs(normalizedLinearValue), 0.1593017578f)), 78.84375f);
-        return ST2084;  // Don't clamp between [0..1], so we can still perform operations on scene values higher than 10,000 nits
+        return ST2084; // Don't clamp between [0..1], so we can still perform operations on scene values higher than 10,000 nits
     }
 
     inline float ST2084ToLinear(float ST2084)
@@ -1319,110 +1328,112 @@ namespace
     }
 }
 
-//--------------------------------------------------------------------------------------
-// Entry-point
-//--------------------------------------------------------------------------------------
-//#ifdef _PREFAST_
-//#pragma prefast(disable : 28198, "Command-line tool, frees all memory on exit")
-//#endif
-
 namespace AssetConversion
 {
-int Convert(
-    const TextureConversionParams& params,
-    uint64_t options,
-    const char* filePath,
-    TextureMetadata& outMetadata,
-    Blob& outBlob)
-{
-    // Parameters and defaults
-    // Copy all of the parameters of params just not for replacing all params in the next 2k lines
-    size_t width = params.width;
-    size_t height = params.height;
-    size_t mipLevels = params.mipLevels;
-    DXGI_FORMAT format = params.format;
-    TEX_FILTER_FLAGS dwFilter = DirectX::TEX_FILTER_DEFAULT;
-    TEX_FILTER_FLAGS dwSRGB = DirectX::TEX_FILTER_DEFAULT;
-    TEX_FILTER_FLAGS dwConvert = DirectX::TEX_FILTER_DEFAULT;
-    TEX_COMPRESS_FLAGS dwCompress = DirectX::TEX_COMPRESS_DEFAULT;
-    TEX_FILTER_FLAGS dwFilterOpts = DirectX::TEX_FILTER_DEFAULT;
-    uint32_t FileType = CODEC_DDS;
-    uint32_t maxSize = 16384;
-    int adapter = -1;
-    float alphaThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
-    float alphaWeight = 1.f;
-    CNMAP_FLAGS dwNormalMap = DirectX::CNMAP_DEFAULT;
-    float nmapAmplitude = 1.f;
-    float wicQuality = -1.f;
-    uint32_t colorKey = 0;
-    uint32_t dwRotateColor = 0;
-    float paperWhiteNits = 200.f;
-    float preserveAlphaCoverageRef = 0.0f;
-    bool keepRecursiveDirs = false;
-    uint32_t swizzleElements[4] = { 0, 1, 2, 3 };
-    uint32_t zeroElements[4] = {};
-    uint32_t oneElements[4] = {};
-
-    //wchar_t szPrefix[MAX_PATH] = {};
-    //wchar_t szSuffix[MAX_PATH] = {};
-    //wchar_t szOutputDir[MAX_PATH] = {};
-
-    // Set locale for output since GetErrorDesc can get localized strings.
-    std::locale::global(std::locale(""));
-
-    // Initialize COM (needed for WIC)
-    HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-    if (FAILED(hr))
-    {
-        wprintf(L"Failed to initialize COM (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-        return 1;
-    }
-
-    // Process command line
-    uint64_t dwOptions = options;
-    std::list<SConversion> conversion;
-
-    SConversion conv = {};
-    std::filesystem::path path(filePath);
-    wcscpy_s(conv.szSrc, path.make_preferred().c_str());
-    conversion.push_back(conv);
-
-
-    if (FileType != CODEC_DDS)
-    {
-        mipLevels = 1;
-    }
-
-    LARGE_INTEGER qpcFreq = {};
-    std::ignore = QueryPerformanceFrequency(&qpcFreq);
-
-    LARGE_INTEGER qpcStart = {};
-    std::ignore = QueryPerformanceCounter(&qpcStart);
-
-    // Convert images
-    bool sizewarn = false;
-    bool nonpow2warn = false;
-    bool non4bc = false;
-    bool preserveAlphaCoverage = false;
     ComPtr<ID3D11Device> pDevice;
+    int adapter = -1;
 
-    int retVal = 0;
-
-    for (auto pConv = conversion.begin(); pConv != conversion.end(); ++pConv)
+    int TextureConversionInit()
     {
-        if (pConv != conversion.begin())
-            wprintf(L"\n");
+        // Set locale for output since GetErrorDesc can get localized strings.
+        std::locale::global(std::locale(""));
+
+        // Initialize COM (needed for WIC)
+        HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+        if (FAILED(hr))
+        {
+            wprintf(L"Failed to initialize COM (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
+            return 1;
+        }
+
+        {
+            if (!CreateDevice(adapter, pDevice.GetAddressOf()))
+            {
+                wprintf(L"\nWARNING: DirectCompute is not available, using BC6H / BC7 CPU codec\n");
+                return 57;
+            }
+        }
+
+        return 0;
+    }
+
+    int Convert(
+        const TextureConversionParams& params,
+        uint64_t options,
+        const char* filePath,
+        TextureMetadata& outMetadata,
+        Blob& outBlob)
+    {
+        // Parameters and defaults
+        // Copy all of the parameters of params just not for replacing all params in the next 2k lines
+        size_t width = params.width;
+        size_t height = params.height;
+        size_t mipLevels = params.mipLevels;
+        DXGI_FORMAT format = params.format;
+        TEX_FILTER_FLAGS dwFilter = DirectX::TEX_FILTER_DEFAULT;
+        TEX_FILTER_FLAGS dwSRGB = DirectX::TEX_FILTER_DEFAULT;
+        TEX_FILTER_FLAGS dwConvert = DirectX::TEX_FILTER_DEFAULT;
+        TEX_COMPRESS_FLAGS dwCompress = DirectX::TEX_COMPRESS_DEFAULT;
+        TEX_FILTER_FLAGS dwFilterOpts = DirectX::TEX_FILTER_DEFAULT;
+        uint32_t FileType = CODEC_DDS;
+        uint32_t maxSize = 16384;
+        float alphaThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
+        float alphaWeight = 1.f;
+        CNMAP_FLAGS dwNormalMap = DirectX::CNMAP_DEFAULT;
+        float nmapAmplitude = 1.f;
+        float wicQuality = -1.f;
+        uint32_t colorKey = 0;
+        uint32_t dwRotateColor = 0;
+        float paperWhiteNits = 200.f;
+        float preserveAlphaCoverageRef = 0.0f;
+        bool keepRecursiveDirs = false;
+        uint32_t swizzleElements[4] = {0, 1, 2, 3};
+        uint32_t zeroElements[4] = {};
+        uint32_t oneElements[4] = {};
+
+        //wchar_t szPrefix[MAX_PATH] = {};
+        //wchar_t szSuffix[MAX_PATH] = {};
+        //wchar_t szOutputDir[MAX_PATH] = {};
+
+        HRESULT hr = S_OK;
+
+        // Process command line
+        uint64_t dwOptions = options;
+
+        SConversion pConv = {};
+        std::filesystem::path path(filePath);
+        wcscpy_s(pConv.szSrc, path.make_preferred().c_str());
+
+
+        if (FileType != CODEC_DDS)
+        {
+            mipLevels = 1;
+        }
+
+        LARGE_INTEGER qpcFreq = {};
+        std::ignore = QueryPerformanceFrequency(&qpcFreq);
+
+        LARGE_INTEGER qpcStart = {};
+        std::ignore = QueryPerformanceCounter(&qpcStart);
+
+        // Convert images
+        bool sizewarn = false;
+        bool nonpow2warn = false;
+        bool non4bc = false;
+        bool preserveAlphaCoverage = false;
+
+        int retVal = 0;
 
         // --- Load source image -------------------------------------------------------
-        wprintf(L"reading %ls", pConv->szSrc);
+        wprintf(L"reading %ls", pConv.szSrc);
         fflush(stdout);
 
         wchar_t ext[_MAX_EXT] = {};
         wchar_t fname[_MAX_FNAME] = {};
-        _wsplitpath_s(pConv->szSrc, nullptr, 0, nullptr, 0, fname, _MAX_FNAME, ext, _MAX_EXT);
+        _wsplitpath_s(pConv.szSrc, nullptr, 0, nullptr, 0, fname, _MAX_FNAME, ext, _MAX_EXT);
 
         TexMetadata info;
-        std::unique_ptr<ScratchImage> image(new (std::nothrow) ScratchImage);
+        std::unique_ptr<ScratchImage> image(new(std::nothrow) ScratchImage);
 
         if (!image)
         {
@@ -1440,12 +1451,11 @@ int Convert(
             if (dwOptions & (uint64_t(1) << OPT_DDS_BAD_DXTN_TAILS))
                 ddsFlags |= DDS_FLAGS_BAD_DXTN_TAILS;
 
-            hr = LoadFromDDSFile(pConv->szSrc, ddsFlags, &info, *image);
+            hr = LoadFromDDSFile(pConv.szSrc, ddsFlags, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                return 43;
             }
 
             if (IsTypeless(info.format))
@@ -1462,8 +1472,7 @@ int Convert(
                 if (IsTypeless(info.format))
                 {
                     wprintf(L" FAILED due to Typeless format %d\n", info.format);
-                    retVal = 1;
-                    continue;
+                    return 44;
                 }
 
                 image->OverrideFormat(info.format);
@@ -1471,60 +1480,55 @@ int Convert(
         }
         else if (_wcsicmp(ext, L".bmp") == 0)
         {
-            hr = LoadFromBMPEx(pConv->szSrc, WIC_FLAGS_NONE | dwFilter, &info, *image);
+            hr = LoadFromBMPEx(pConv.szSrc, WIC_FLAGS_NONE | dwFilter, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                return 45;
             }
         }
         else if (_wcsicmp(ext, L".tga") == 0)
         {
             TGA_FLAGS tgaFlags = (IsBGR(format)) ? TGA_FLAGS_BGR : TGA_FLAGS_NONE;
 
-            hr = LoadFromTGAFile(pConv->szSrc, tgaFlags, &info, *image);
+            hr = LoadFromTGAFile(pConv.szSrc, tgaFlags, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                return 46;
             }
         }
         else if (_wcsicmp(ext, L".hdr") == 0)
         {
-            hr = LoadFromHDRFile(pConv->szSrc, &info, *image);
+            hr = LoadFromHDRFile(pConv.szSrc, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                return 47;
             }
         }
         else if (_wcsicmp(ext, L".ppm") == 0)
         {
-            hr = LoadFromPortablePixMap(pConv->szSrc, &info, *image);
+            hr = LoadFromPortablePixMap(pConv.szSrc, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                return 48;
             }
         }
         else if (_wcsicmp(ext, L".pfm") == 0)
         {
-            hr = LoadFromPortablePixMapHDR(pConv->szSrc, &info, *image);
+            hr = LoadFromPortablePixMapHDR(pConv.szSrc, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                return 49;
             }
         }
-    #ifdef USE_OPENEXR
+#ifdef USE_OPENEXR
         else if (_wcsicmp(ext, L".exr") == 0)
         {
-            hr = LoadFromEXRFile(pConv->szSrc, &info, *image);
+            hr = LoadFromEXRFile(pConv.szSrc, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
@@ -1532,7 +1536,7 @@ int Convert(
                 continue;
             }
         }
-    #endif
+#endif
         else
         {
             // WIC shares the same filter values for mode and dither
@@ -1547,11 +1551,10 @@ int Convert(
             if (FileType == CODEC_DDS)
                 wicFlags |= WIC_FLAGS_ALL_FRAMES;
 
-            hr = LoadFromWICFile(pConv->szSrc, wicFlags, &info, *image);
+            hr = LoadFromWICFile(pConv.szSrc, wicFlags, &info, *image);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
                 if (hr == static_cast<HRESULT>(0xc00d5212) /* MF_E_TOPO_CODEC_NOT_FOUND */)
                 {
                     if (_wcsicmp(ext, L".heic") == 0 || _wcsicmp(ext, L".heif") == 0)
@@ -1563,7 +1566,7 @@ int Convert(
                         wprintf(L"INFO: This format requires installing the WEBP Image Extensions - https://www.microsoft.com/p/webp-image-extensions/9pg2dk419drg\n");
                     }
                 }
-                continue;
+                return 50;
             }
         }
 
@@ -1582,7 +1585,7 @@ int Convert(
             assert(img);
             const size_t nimg = image->GetImageCount();
 
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1593,9 +1596,8 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [converttosingleplane] (%08X%ls)\n",
-                    static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                        static_cast<unsigned int>(hr), GetErrorDesc(hr));
+                return 51;
             }
 
             auto& tinfo = timage->GetMetadata();
@@ -1624,7 +1626,7 @@ int Convert(
             {
                 if (dwOptions & (uint64_t(1) << OPT_BCNONMULT4FIX))
                 {
-                    std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+                    std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
                     if (!timage)
                     {
                         wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1646,7 +1648,7 @@ int Convert(
                     if (FAILED(hr))
                     {
                         wprintf(L" FAILED [BC non-multiple-of-4 fixup] (%08X%ls)\n",
-                            static_cast<unsigned int>(hr), GetErrorDesc(hr));
+                                static_cast<unsigned int>(hr), GetErrorDesc(hr));
                         return 5;
                     }
 
@@ -1686,7 +1688,7 @@ int Convert(
             assert(img);
             const size_t nimg = image->GetImageCount();
 
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1697,8 +1699,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [decompress] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
-                continue;
+                return 52;
             }
 
             auto& tinfo = timage->GetMetadata();
@@ -1744,7 +1745,7 @@ int Convert(
                 assert(img);
                 const size_t nimg = image->GetImageCount();
 
-                std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+                std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1755,9 +1756,8 @@ int Convert(
                 if (FAILED(hr))
                 {
                     wprintf(L" FAILED [demultiply alpha] (%08X%ls)\n",
-                        static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                    retVal = 1;
-                    continue;
+                            static_cast<unsigned int>(hr), GetErrorDesc(hr));
+                    return 53;
                 }
 
                 auto& tinfo = timage->GetMetadata();
@@ -1779,7 +1779,7 @@ int Convert(
         // --- Flip/Rotate -------------------------------------------------------------
         if (dwOptions & ((uint64_t(1) << OPT_HFLIP) | (uint64_t(1) << OPT_VFLIP)))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1845,7 +1845,7 @@ int Convert(
 
         if (info.width != twidth || info.height != theight)
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1878,8 +1878,8 @@ int Convert(
             if (tMips > 0)
             {
                 const size_t maxMips = (info.depth > 1)
-                    ? CountMips3D(info.width, info.height, info.depth)
-                    : CountMips(info.width, info.height);
+                                           ? CountMips3D(info.width, info.height, info.depth)
+                                           : CountMips(info.width, info.height);
 
                 if (tMips > maxMips)
                 {
@@ -1893,7 +1893,7 @@ int Convert(
             || zeroElements[0] != 0 || zeroElements[1] != 0 || zeroElements[2] != 0 || zeroElements[3] != 0
             || oneElements[0] != 0 || oneElements[1] != 0 || oneElements[2] != 0 || oneElements[3] != 0)
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1904,27 +1904,27 @@ int Convert(
             const XMVECTOR oc = XMVectorSelectControl(oneElements[0], oneElements[1], oneElements[2], oneElements[3]);
 
             hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                [&, zc, oc](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                {
-                    UNREFERENCED_PARAMETER(y);
+                                [&, zc, oc](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                {
+                                    UNREFERENCED_PARAMETER(y);
 
-                    for (size_t j = 0; j < w; ++j)
-                    {
-                        XMVECTOR pixel = XMVectorSwizzle(inPixels[j],
-                            swizzleElements[0], swizzleElements[1], swizzleElements[2], swizzleElements[3]);
-                        pixel = XMVectorSelect(pixel, g_XMZero, zc);
-                        outPixels[j] = XMVectorSelect(pixel, g_XMOne, oc);
-                    }
-                }, *timage);
+                                    for (size_t j = 0; j < w; ++j)
+                                    {
+                                        XMVECTOR pixel = XMVectorSwizzle(inPixels[j],
+                                                                         swizzleElements[0], swizzleElements[1], swizzleElements[2], swizzleElements[3]);
+                                        pixel = XMVectorSelect(pixel, g_XMZero, zc);
+                                        outPixels[j] = XMVectorSelect(pixel, g_XMOne, oc);
+                                    }
+                                }, *timage);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [swizzle] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
                 return 13;
             }
 
-        #ifndef NDEBUG
+#ifndef NDEBUG
             auto& tinfo = timage->GetMetadata();
-        #endif
+#endif
 
             assert(info.width == tinfo.width);
             assert(info.height == tinfo.height);
@@ -1944,7 +1944,7 @@ int Convert(
         {
             if (dwRotateColor == ROTATE_HDR10_TO_709 || dwRotateColor == ROTATE_P3D65_TO_709)
             {
-                std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+                std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1952,16 +1952,16 @@ int Convert(
                 }
 
                 hr = Convert(image->GetImages(), image->GetImageCount(), image->GetMetadata(), DXGI_FORMAT_R16G16B16A16_FLOAT,
-                    dwFilter | dwFilterOpts | dwSRGB | dwConvert, alphaThreshold, *timage);
+                             dwFilter | dwFilterOpts | dwSRGB | dwConvert, alphaThreshold, *timage);
                 if (FAILED(hr))
                 {
                     wprintf(L" FAILED [convert] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
                     return 15;
                 }
 
-            #ifndef NDEBUG
+#ifndef NDEBUG
                 auto& tinfo = timage->GetMetadata();
-            #endif
+#endif
 
                 assert(tinfo.format == DXGI_FORMAT_R16G16B16A16_FLOAT);
                 info.format = DXGI_FORMAT_R16G16B16A16_FLOAT;
@@ -1978,7 +1978,7 @@ int Convert(
                 cimage.reset();
             }
 
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -1989,196 +1989,196 @@ int Convert(
             {
             case ROTATE_709_TO_HDR10:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        const XMVECTOR paperWhite = XMVectorReplicate(paperWhiteNits);
+                                        const XMVECTOR paperWhite = XMVectorReplicate(paperWhiteNits);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            XMVECTOR nvalue = XMVector3Transform(value, c_from709to2020);
+                                            XMVECTOR nvalue = XMVector3Transform(value, c_from709to2020);
 
-                            // Convert to ST.2084
-                            nvalue = XMVectorDivide(XMVectorMultiply(nvalue, paperWhite), c_MaxNitsFor2084);
+                                            // Convert to ST.2084
+                                            nvalue = XMVectorDivide(XMVectorMultiply(nvalue, paperWhite), c_MaxNitsFor2084);
 
-                            XMFLOAT4A tmp;
-                            XMStoreFloat4A(&tmp, nvalue);
+                                            XMFLOAT4A tmp;
+                                            XMStoreFloat4A(&tmp, nvalue);
 
-                            tmp.x = LinearToST2084(tmp.x);
-                            tmp.y = LinearToST2084(tmp.y);
-                            tmp.z = LinearToST2084(tmp.z);
+                                            tmp.x = LinearToST2084(tmp.x);
+                                            tmp.y = LinearToST2084(tmp.y);
+                                            tmp.z = LinearToST2084(tmp.z);
 
-                            nvalue = XMLoadFloat4A(&tmp);
+                                            nvalue = XMLoadFloat4A(&tmp);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             case ROTATE_709_TO_2020:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            const XMVECTOR nvalue = XMVector3Transform(value, c_from709to2020);
+                                            const XMVECTOR nvalue = XMVector3Transform(value, c_from709to2020);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             case ROTATE_HDR10_TO_709:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        const XMVECTOR paperWhite = XMVectorReplicate(paperWhiteNits);
+                                        const XMVECTOR paperWhite = XMVectorReplicate(paperWhiteNits);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            // Convert from ST.2084
-                            XMFLOAT4A tmp;
-                            XMStoreFloat4A(&tmp, value);
+                                            // Convert from ST.2084
+                                            XMFLOAT4A tmp;
+                                            XMStoreFloat4A(&tmp, value);
 
-                            tmp.x = ST2084ToLinear(tmp.x);
-                            tmp.y = ST2084ToLinear(tmp.y);
-                            tmp.z = ST2084ToLinear(tmp.z);
+                                            tmp.x = ST2084ToLinear(tmp.x);
+                                            tmp.y = ST2084ToLinear(tmp.y);
+                                            tmp.z = ST2084ToLinear(tmp.z);
 
-                            XMVECTOR nvalue = XMLoadFloat4A(&tmp);
+                                            XMVECTOR nvalue = XMLoadFloat4A(&tmp);
 
-                            nvalue = XMVectorDivide(XMVectorMultiply(nvalue, c_MaxNitsFor2084), paperWhite);
+                                            nvalue = XMVectorDivide(XMVectorMultiply(nvalue, c_MaxNitsFor2084), paperWhite);
 
-                            nvalue = XMVector3Transform(nvalue, c_from2020to709);
+                                            nvalue = XMVector3Transform(nvalue, c_from2020to709);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             case ROTATE_2020_TO_709:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            const XMVECTOR nvalue = XMVector3Transform(value, c_from2020to709);
+                                            const XMVECTOR nvalue = XMVector3Transform(value, c_from2020to709);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             case ROTATE_P3D65_TO_HDR10:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        const XMVECTOR paperWhite = XMVectorReplicate(paperWhiteNits);
+                                        const XMVECTOR paperWhite = XMVectorReplicate(paperWhiteNits);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            XMVECTOR nvalue = XMVector3Transform(value, c_fromP3D65to2020);
+                                            XMVECTOR nvalue = XMVector3Transform(value, c_fromP3D65to2020);
 
-                            // Convert to ST.2084
-                            nvalue = XMVectorDivide(XMVectorMultiply(nvalue, paperWhite), c_MaxNitsFor2084);
+                                            // Convert to ST.2084
+                                            nvalue = XMVectorDivide(XMVectorMultiply(nvalue, paperWhite), c_MaxNitsFor2084);
 
-                            XMFLOAT4A tmp;
-                            XMStoreFloat4A(&tmp, nvalue);
+                                            XMFLOAT4A tmp;
+                                            XMStoreFloat4A(&tmp, nvalue);
 
-                            tmp.x = LinearToST2084(tmp.x);
-                            tmp.y = LinearToST2084(tmp.y);
-                            tmp.z = LinearToST2084(tmp.z);
+                                            tmp.x = LinearToST2084(tmp.x);
+                                            tmp.y = LinearToST2084(tmp.y);
+                                            tmp.z = LinearToST2084(tmp.z);
 
-                            nvalue = XMLoadFloat4A(&tmp);
+                                            nvalue = XMLoadFloat4A(&tmp);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             case ROTATE_P3D65_TO_2020:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            const XMVECTOR nvalue = XMVector3Transform(value, c_fromP3D65to2020);
+                                            const XMVECTOR nvalue = XMVector3Transform(value, c_fromP3D65to2020);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             case ROTATE_709_TO_P3D65:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            const XMVECTOR nvalue = XMVector3Transform(value, c_from709toP3D65);
+                                            const XMVECTOR nvalue = XMVector3Transform(value, c_from709toP3D65);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             case ROTATE_P3D65_TO_709:
                 hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                    {
-                        UNREFERENCED_PARAMETER(y);
+                                    [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                    {
+                                        UNREFERENCED_PARAMETER(y);
 
-                        for (size_t j = 0; j < w; ++j)
-                        {
-                            XMVECTOR value = inPixels[j];
+                                        for (size_t j = 0; j < w; ++j)
+                                        {
+                                            XMVECTOR value = inPixels[j];
 
-                            const XMVECTOR nvalue = XMVector3Transform(value, c_fromP3D65to709);
+                                            const XMVECTOR nvalue = XMVector3Transform(value, c_fromP3D65to709);
 
-                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                            value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                            outPixels[j] = value;
-                        }
-                    }, *timage);
+                                            outPixels[j] = value;
+                                        }
+                                    }, *timage);
                 break;
 
             default:
@@ -2188,13 +2188,13 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [rotate color apply] (%08X%ls)\n",
-                    static_cast<unsigned int>(hr), GetErrorDesc(hr));
+                        static_cast<unsigned int>(hr), GetErrorDesc(hr));
                 return 17;
             }
 
-        #ifndef NDEBUG
+#ifndef NDEBUG
             auto& tinfo = timage->GetMetadata();
-        #endif
+#endif
 
             assert(info.width == tinfo.width);
             assert(info.height == tinfo.height);
@@ -2212,7 +2212,7 @@ int Convert(
         // --- Tonemap (if requested) --------------------------------------------------
         if (dwOptions & uint64_t(1) << OPT_TONEMAP)
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2222,21 +2222,21 @@ int Convert(
             // Compute max luminosity across all images
             XMVECTOR maxLum = XMVectorZero();
             hr = EvaluateImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                [&](const XMVECTOR* pixels, size_t w, size_t y)
-                {
-                    UNREFERENCED_PARAMETER(y);
+                               [&](const XMVECTOR* pixels, size_t w, size_t y)
+                               {
+                                   UNREFERENCED_PARAMETER(y);
 
-                    for (size_t j = 0; j < w; ++j)
-                    {
-                        static const XMVECTORF32 s_luminance = { { { 0.3f, 0.59f, 0.11f, 0.f } } };
+                                   for (size_t j = 0; j < w; ++j)
+                                   {
+                                       static const XMVECTORF32 s_luminance = {{{0.3f, 0.59f, 0.11f, 0.f}}};
 
-                        XMVECTOR v = *pixels++;
+                                       XMVECTOR v = *pixels++;
 
-                        v = XMVector3Dot(v, s_luminance);
+                                       v = XMVector3Dot(v, s_luminance);
 
-                        maxLum = XMVectorMax(v, maxLum);
-                    }
-                });
+                                       maxLum = XMVectorMax(v, maxLum);
+                                   }
+                               });
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [tonemap maxlum] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
@@ -2248,33 +2248,33 @@ int Convert(
             maxLum = XMVectorMultiply(maxLum, maxLum);
 
             hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                {
-                    UNREFERENCED_PARAMETER(y);
+                                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                {
+                                    UNREFERENCED_PARAMETER(y);
 
-                    for (size_t j = 0; j < w; ++j)
-                    {
-                        XMVECTOR value = inPixels[j];
+                                    for (size_t j = 0; j < w; ++j)
+                                    {
+                                        XMVECTOR value = inPixels[j];
 
-                        const XMVECTOR scale = XMVectorDivide(
-                            XMVectorAdd(g_XMOne, XMVectorDivide(value, maxLum)),
-                            XMVectorAdd(g_XMOne, value));
-                        const XMVECTOR nvalue = XMVectorMultiply(value, scale);
+                                        const XMVECTOR scale = XMVectorDivide(
+                                            XMVectorAdd(g_XMOne, XMVectorDivide(value, maxLum)),
+                                            XMVectorAdd(g_XMOne, value));
+                                        const XMVECTOR nvalue = XMVectorMultiply(value, scale);
 
-                        value = XMVectorSelect(value, nvalue, g_XMSelect1110);
+                                        value = XMVectorSelect(value, nvalue, g_XMSelect1110);
 
-                        outPixels[j] = value;
-                    }
-                }, *timage);
+                                        outPixels[j] = value;
+                                    }
+                                }, *timage);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [tonemap apply] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
                 return 20;
             }
 
-        #ifndef NDEBUG
+#ifndef NDEBUG
             auto& tinfo = timage->GetMetadata();
-        #endif
+#endif
 
             assert(info.width == tinfo.width);
             assert(info.height == tinfo.height);
@@ -2292,7 +2292,7 @@ int Convert(
         // --- Convert -----------------------------------------------------------------
         if (dwOptions & (uint64_t(1) << OPT_NORMAL_MAP))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2345,7 +2345,7 @@ int Convert(
         }
         else if (info.format != tformat && !IsCompressed(tformat))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2353,7 +2353,7 @@ int Convert(
             }
 
             hr = Convert(image->GetImages(), image->GetImageCount(), image->GetMetadata(), tformat,
-                dwFilter | dwFilterOpts | dwSRGB | dwConvert, alphaThreshold, *timage);
+                         dwFilter | dwFilterOpts | dwSRGB | dwConvert, alphaThreshold, *timage);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [convert] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
@@ -2381,7 +2381,7 @@ int Convert(
         if ((dwOptions & (uint64_t(1) << OPT_COLORKEY))
             && HasAlpha(info.format))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2391,37 +2391,37 @@ int Convert(
             XMVECTOR colorKeyValue = XMLoadColor(reinterpret_cast<const XMCOLOR*>(&colorKey));
 
             hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                {
-                    static const XMVECTORF32 s_tolerance = { { { 0.2f, 0.2f, 0.2f, 0.f } } };
+                                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                {
+                                    static const XMVECTORF32 s_tolerance = {{{0.2f, 0.2f, 0.2f, 0.f}}};
 
-                    UNREFERENCED_PARAMETER(y);
+                                    UNREFERENCED_PARAMETER(y);
 
-                    for (size_t j = 0; j < w; ++j)
-                    {
-                        XMVECTOR value = inPixels[j];
+                                    for (size_t j = 0; j < w; ++j)
+                                    {
+                                        XMVECTOR value = inPixels[j];
 
-                        if (XMVector3NearEqual(value, colorKeyValue, s_tolerance))
-                        {
-                            value = g_XMZero;
-                        }
-                        else
-                        {
-                            value = XMVectorSelect(g_XMOne, value, g_XMSelect1110);
-                        }
+                                        if (XMVector3NearEqual(value, colorKeyValue, s_tolerance))
+                                        {
+                                            value = g_XMZero;
+                                        }
+                                        else
+                                        {
+                                            value = XMVectorSelect(g_XMOne, value, g_XMSelect1110);
+                                        }
 
-                        outPixels[j] = value;
-                    }
-                }, *timage);
+                                        outPixels[j] = value;
+                                    }
+                                }, *timage);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [colorkey] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
                 return 26;
             }
 
-        #ifndef NDEBUG
+#ifndef NDEBUG
             auto& tinfo = timage->GetMetadata();
-        #endif
+#endif
 
             assert(info.width == tinfo.width);
             assert(info.height == tinfo.height);
@@ -2439,7 +2439,7 @@ int Convert(
         // --- Invert Y Channel --------------------------------------------------------
         if (dwOptions & (uint64_t(1) << OPT_INVERT_Y))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2447,30 +2447,30 @@ int Convert(
             }
 
             hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                {
-                    static const XMVECTORU32 s_selecty = { { { XM_SELECT_0, XM_SELECT_1, XM_SELECT_0, XM_SELECT_0 } } };
+                                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                {
+                                    static const XMVECTORU32 s_selecty = {{{XM_SELECT_0, XM_SELECT_1, XM_SELECT_0, XM_SELECT_0}}};
 
-                    UNREFERENCED_PARAMETER(y);
+                                    UNREFERENCED_PARAMETER(y);
 
-                    for (size_t j = 0; j < w; ++j)
-                    {
-                        const XMVECTOR value = inPixels[j];
+                                    for (size_t j = 0; j < w; ++j)
+                                    {
+                                        const XMVECTOR value = inPixels[j];
 
-                        const XMVECTOR inverty = XMVectorSubtract(g_XMOne, value);
+                                        const XMVECTOR inverty = XMVectorSubtract(g_XMOne, value);
 
-                        outPixels[j] = XMVectorSelect(value, inverty, s_selecty);
-                    }
-                }, *timage);
+                                        outPixels[j] = XMVectorSelect(value, inverty, s_selecty);
+                                    }
+                                }, *timage);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [inverty] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
                 return 28;
             }
 
-        #ifndef NDEBUG
+#ifndef NDEBUG
             auto& tinfo = timage->GetMetadata();
-        #endif
+#endif
 
             assert(info.width == tinfo.width);
             assert(info.height == tinfo.height);
@@ -2488,7 +2488,7 @@ int Convert(
         // --- Reconstruct Z Channel ---------------------------------------------------
         if (dwOptions & (uint64_t(1) << OPT_RECONSTRUCT_Z))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2498,40 +2498,40 @@ int Convert(
             bool isunorm = (FormatDataType(info.format) == FORMAT_TYPE_UNORM) != 0;
 
             hr = TransformImage(image->GetImages(), image->GetImageCount(), image->GetMetadata(),
-                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
-                {
-                    static const XMVECTORU32 s_selectz = { { { XM_SELECT_0, XM_SELECT_0, XM_SELECT_1, XM_SELECT_0 } } };
+                                [&](XMVECTOR* outPixels, const XMVECTOR* inPixels, size_t w, size_t y)
+                                {
+                                    static const XMVECTORU32 s_selectz = {{{XM_SELECT_0, XM_SELECT_0, XM_SELECT_1, XM_SELECT_0}}};
 
-                    UNREFERENCED_PARAMETER(y);
+                                    UNREFERENCED_PARAMETER(y);
 
-                    for (size_t j = 0; j < w; ++j)
-                    {
-                        const XMVECTOR value = inPixels[j];
+                                    for (size_t j = 0; j < w; ++j)
+                                    {
+                                        const XMVECTOR value = inPixels[j];
 
-                        XMVECTOR z;
-                        if (isunorm)
-                        {
-                            XMVECTOR x2 = XMVectorMultiplyAdd(value, g_XMTwo, g_XMNegativeOne);
-                            x2 = XMVectorSqrt(XMVectorSubtract(g_XMOne, XMVector2Dot(x2, x2)));
-                            z = XMVectorMultiplyAdd(x2, g_XMOneHalf, g_XMOneHalf);
-                        }
-                        else
-                        {
-                            z = XMVectorSqrt(XMVectorSubtract(g_XMOne, XMVector2Dot(value, value)));
-                        }
+                                        XMVECTOR z;
+                                        if (isunorm)
+                                        {
+                                            XMVECTOR x2 = XMVectorMultiplyAdd(value, g_XMTwo, g_XMNegativeOne);
+                                            x2 = XMVectorSqrt(XMVectorSubtract(g_XMOne, XMVector2Dot(x2, x2)));
+                                            z = XMVectorMultiplyAdd(x2, g_XMOneHalf, g_XMOneHalf);
+                                        }
+                                        else
+                                        {
+                                            z = XMVectorSqrt(XMVectorSubtract(g_XMOne, XMVector2Dot(value, value)));
+                                        }
 
-                        outPixels[j] = XMVectorSelect(value, z, s_selectz);
-                    }
-                }, *timage);
+                                        outPixels[j] = XMVectorSelect(value, z, s_selectz);
+                                    }
+                                }, *timage);
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [reconstructz] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
                 return 30;
             }
 
-        #ifndef NDEBUG
+#ifndef NDEBUG
             auto& tinfo = timage->GetMetadata();
-        #endif
+#endif
 
             assert(info.width == tinfo.width);
             assert(info.height == tinfo.height);
@@ -2573,7 +2573,7 @@ int Convert(
             // Mips generation only works on a single base image, so strip off existing mip levels
             // Also required for preserve alpha coverage so that existing mips are regenerated
 
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2586,7 +2586,7 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED [copy to single level] (%08X%ls)\n",
-                    static_cast<unsigned int>(hr), GetErrorDesc(hr));
+                        static_cast<unsigned int>(hr), GetErrorDesc(hr));
                 return 32;
             }
 
@@ -2595,11 +2595,11 @@ int Convert(
                 for (size_t d = 0; d < info.depth; ++d)
                 {
                     hr = CopyRectangle(*image->GetImage(0, 0, d), Rect(0, 0, info.width, info.height),
-                        *timage->GetImage(0, 0, d), TEX_FILTER_DEFAULT, 0, 0);
+                                       *timage->GetImage(0, 0, d), TEX_FILTER_DEFAULT, 0, 0);
                     if (FAILED(hr))
                     {
                         wprintf(L" FAILED [copy to single level] (%08X%ls)\n",
-                            static_cast<unsigned int>(hr), GetErrorDesc(hr));
+                                static_cast<unsigned int>(hr), GetErrorDesc(hr));
                         return 33;
                     }
                 }
@@ -2609,7 +2609,7 @@ int Convert(
                 for (size_t i = 0; i < info.arraySize; ++i)
                 {
                     hr = CopyRectangle(*image->GetImage(0, i, 0), Rect(0, 0, info.width, info.height),
-                        *timage->GetImage(0, i, 0), TEX_FILTER_DEFAULT, 0, 0);
+                                       *timage->GetImage(0, i, 0), TEX_FILTER_DEFAULT, 0, 0);
                     if (FAILED(hr))
                     {
                         wprintf(L" FAILED [copy to single level] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
@@ -2664,7 +2664,7 @@ int Convert(
 
         if ((!tMips || info.mipLevels != tMips) && (info.width > 1 || info.height > 1 || info.depth > 1))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2703,7 +2703,7 @@ int Convert(
         // --- Preserve mipmap alpha coverage (if requested) ---------------------------
         if (preserveAlphaCoverage && info.mipLevels != 1 && (info.dimension != TEX_DIMENSION_TEXTURE3D))
         {
-            std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+            std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
             if (!timage)
             {
                 wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2731,9 +2731,9 @@ int Convert(
                 }
             }
 
-        #ifndef NDEBUG
+#ifndef NDEBUG
             auto& tinfo = timage->GetMetadata();
-        #endif
+#endif
 
             assert(info.width == tinfo.width);
             assert(info.height == tinfo.height);
@@ -2762,7 +2762,7 @@ int Convert(
                 assert(img);
                 const size_t nimg = image->GetImageCount();
 
-                std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+                std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2773,8 +2773,7 @@ int Convert(
                 if (FAILED(hr))
                 {
                     wprintf(L" FAILED [premultiply alpha] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                    retVal = 1;
-                    continue;
+                    return 54;
                 }
 
                 auto& tinfo = timage->GetMetadata();
@@ -2825,7 +2824,7 @@ int Convert(
                 assert(img);
                 const size_t nimg = image->GetImageCount();
 
-                std::unique_ptr<ScratchImage> timage(new (std::nothrow) ScratchImage);
+                std::unique_ptr<ScratchImage> timage(new(std::nothrow) ScratchImage);
                 if (!timage)
                 {
                     wprintf(L"\nERROR: Memory allocation failed\n");
@@ -2843,24 +2842,6 @@ int Convert(
                 case DXGI_FORMAT_BC7_UNORM_SRGB:
                     bc6hbc7 = true;
 
-                    {
-                        static bool s_tryonce = false;
-
-                        if (!s_tryonce)
-                        {
-                            s_tryonce = true;
-
-                            if (!(dwOptions & (uint64_t(1) << OPT_NOGPU)))
-                            {
-                                if (!CreateDevice(adapter, pDevice.GetAddressOf()))
-                                    wprintf(L"\nWARNING: DirectCompute is not available, using BC6H / BC7 CPU codec\n");
-                            }
-                            else
-                            {
-                                wprintf(L"\nWARNING: using BC6H / BC7 CPU codec\n");
-                            }
-                        }
-                    }
                     break;
 
                 default:
@@ -2868,12 +2849,12 @@ int Convert(
                 }
 
                 TEX_COMPRESS_FLAGS cflags = dwCompress;
-            #ifdef _OPENMP
+#ifdef _OPENMP
                 if (!(dwOptions & (uint64_t(1) << OPT_FORCE_SINGLEPROC)))
                 {
                     cflags |= TEX_COMPRESS_PARALLEL;
                 }
-            #endif
+#endif
 
                 if ((img->width % 4) != 0 || (img->height % 4) != 0)
                 {
@@ -2891,8 +2872,7 @@ int Convert(
                 if (FAILED(hr))
                 {
                     wprintf(L" FAILED [compress] (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                    retVal = 1;
-                    continue;
+                    return 55;
                 }
 
                 auto& tinfo = timage->GetMetadata();
@@ -2959,79 +2939,6 @@ int Convert(
 
             wprintf(L"\n");
 
-            // Figure out dest filename
-            wchar_t *pchSlash, *pchDot;
-
-            //wchar_t szDest[1024] = {};
-            //wcscpy_s(szDest, szOutputDir);
-
-            //if (keepRecursiveDirs && *pConv->szFolder)
-            //{
-            //    wcscat_s(szDest, pConv->szFolder);
-
-            //    wchar_t szPath[MAX_PATH] = {};
-            //    if (!GetFullPathNameW(szDest, MAX_PATH, szPath, nullptr))
-            //    {
-            //        wprintf(L" get full path FAILED (%08X%ls)\n",
-            //            static_cast<unsigned int>(HRESULT_FROM_WIN32(GetLastError())), GetErrorDesc(HRESULT_FROM_WIN32(GetLastError())));
-            //        retVal = 1;
-            //        continue;
-            //    }
-
-            //    auto const err = static_cast<DWORD>(SHCreateDirectoryExW(nullptr, szPath, nullptr));
-            //    if (err != ERROR_SUCCESS && err != ERROR_ALREADY_EXISTS)
-            //    {
-            //        wprintf(L" directory creation FAILED (%08X%ls)\n",
-            //            static_cast<unsigned int>(HRESULT_FROM_WIN32(err)), GetErrorDesc(HRESULT_FROM_WIN32(err)));
-            //        retVal = 1;
-            //        continue;
-            //    }
-            //}
-
-            //if (*szPrefix)
-            //    wcscat_s(szDest, szPrefix);
-
-            //pchSlash = wcsrchr(pConv->szSrc, std::filesystem::path::preferred_separator);
-            //if (pchSlash)
-            //    wcscat_s(szDest, pchSlash + 1);
-            //else
-            //    wcscat_s(szDest, pConv->szSrc);
-
-            //pchSlash = wcsrchr(szDest, std::filesystem::path::preferred_separator);
-            //pchDot = wcsrchr(szDest, '.');
-
-            //if (pchDot > pchSlash)
-            //    *pchDot = 0;
-
-            //if (*szSuffix)
-            //    wcscat_s(szDest, szSuffix);
-
-            //if (dwOptions & (uint64_t(1) << OPT_TOLOWER))
-            //{
-            //    std::ignore = _wcslwr_s(szDest);
-            //}
-
-            //if (wcslen(szDest) > _MAX_PATH)
-            //{
-            //    wprintf(L"\nERROR: Output filename exceeds max-path, skipping!\n");
-            //    retVal = 1;
-            //    continue;
-            //}
-
-            //// Write texture
-            //wprintf(L"writing %ls", szDest);
-            //fflush(stdout);
-
-            //if (~dwOptions & (uint64_t(1) << OPT_OVERWRITE))
-            //{
-            //    if (GetFileAttributesW(szDest) != INVALID_FILE_ATTRIBUTES)
-            //    {
-            //        wprintf(L"\nERROR: Output file already exists, use -y to overwrite:\n");
-            //        retVal = 1;
-            //        continue;
-            //    }
-            //}
-
             switch (FileType)
             {
             case CODEC_DDS:
@@ -3060,25 +2967,26 @@ int Convert(
 
             case CODEC_PPM:
                 hr = E_FAIL;
-                //hr = SaveToPortablePixMap(img[0], szDest);
+            //hr = SaveToPortablePixMap(img[0], szDest);
                 break;
 
             case CODEC_PFM:
                 hr = E_FAIL;
-                //hr = SaveToPortablePixMapHDR(img[0], szDest);
+            //hr = SaveToPortablePixMapHDR(img[0], szDest);
                 break;
 
-            #ifdef USE_OPENEXR
+#ifdef USE_OPENEXR
             case CODEC_EXR:
                 hr = SaveToEXRFile(img[0], szDest);
                 break;
-            #endif
+#endif
 
             default:
                 {
                     const WICCodecs codec = (FileType == CODEC_HDP || FileType == CODEC_JXR) ? WIC_CODEC_WMP : static_cast<WICCodecs>(FileType);
                     const size_t nimages = (dwOptions & (uint64_t(1) << OPT_WIC_MULTIFRAME)) ? nimg : 1;
-                    hr = SaveToWICMemory(img, nimages, WIC_FLAGS_NONE, GetWICCodec(codec), outBlob, nullptr,
+                    hr = SaveToWICMemory(
+                        img, nimages, WIC_FLAGS_NONE, GetWICCodec(codec), outBlob, nullptr,
                         [&](IPropertyBag2* props)
                         {
                             const bool wicLossless = (dwOptions & (uint64_t(1) << OPT_WIC_LOSSLESS)) != 0;
@@ -3147,67 +3055,65 @@ int Convert(
             if (FAILED(hr))
             {
                 wprintf(L" FAILED (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                retVal = 1;
                 if ((hr == static_cast<HRESULT>(0xc00d5212) /* MF_E_TOPO_CODEC_NOT_FOUND */) && (FileType == WIC_CODEC_HEIF))
                 {
                     wprintf(L"INFO: This format requires installing the HEIF Image Extensions - https://aka.ms/heif\n");
                 }
-                continue;
+                return 56;
             }
             wprintf(L"\n");
         }
-    }
 
-    if (sizewarn)
-    {
-        wprintf(L"\nWARNING: Target size exceeds maximum size for feature level (%u)\n", maxSize);
-    }
-
-    if (nonpow2warn && maxSize <= 4096)
-    {
-        // Only emit this warning if ran with -fl set to a 9.x feature level
-        wprintf(L"\nWARNING: Not all feature levels support non-power-of-2 textures with mipmaps\n");
-    }
-
-    if (non4bc)
-        wprintf(L"\nWARNING: Direct3D requires BC image to be multiple of 4 in width & height\n");
-
-    if (dwOptions & (uint64_t(1) << OPT_TIMING))
-    {
-        LARGE_INTEGER qpcEnd = {};
-        std::ignore = QueryPerformanceCounter(&qpcEnd);
-
-        const LONGLONG delta = qpcEnd.QuadPart - qpcStart.QuadPart;
-        wprintf(L"\n Processing time: %f seconds\n", double(delta) / double(qpcFreq.QuadPart));
-    }
-
-    return retVal;
-}
-
-bool IsHDR(const char* filePath)
-{
-    FILE* f;
-    bool res = false;
-    const char* test1 = "#?RADIANCE";
-    const char* test2 = "#?RGBE";
-    if (fopen_s(&f, filePath, "r") == 0)
-    {
-        auto CheckHdr = [](const char* testStr, FILE* file)
+        if (sizewarn)
         {
-            char buf[16];
-
-            size_t len = strlen(testStr);
-            fseek(file, 0, 0);
-            fread_s(buf, len, 1, len, file);
-            return strncmp(testStr, buf, len) == 0;
-        };
-
-        if (CheckHdr(test1, f) || CheckHdr(test2, f))
-        {
-            res = true;
+            wprintf(L"\nWARNING: Target size exceeds maximum size for feature level (%u)\n", maxSize);
         }
-        fclose(f);
+
+        if (nonpow2warn && maxSize <= 4096)
+        {
+            // Only emit this warning if ran with -fl set to a 9.x feature level
+            wprintf(L"\nWARNING: Not all feature levels support non-power-of-2 textures with mipmaps\n");
+        }
+
+        if (non4bc)
+            wprintf(L"\nWARNING: Direct3D requires BC image to be multiple of 4 in width & height\n");
+
+        if (dwOptions & (uint64_t(1) << OPT_TIMING))
+        {
+            LARGE_INTEGER qpcEnd = {};
+            std::ignore = QueryPerformanceCounter(&qpcEnd);
+
+            const LONGLONG delta = qpcEnd.QuadPart - qpcStart.QuadPart;
+            wprintf(L"\n Processing time: %f seconds\n", double(delta) / double(qpcFreq.QuadPart));
+        }
+
+        return retVal;
     }
-    return res;
-}
+
+    bool IsHDR(const char* filePath)
+    {
+        FILE* f;
+        bool res = false;
+        const char* test1 = "#?RADIANCE";
+        const char* test2 = "#?RGBE";
+        if (fopen_s(&f, filePath, "r") == 0)
+        {
+            auto CheckHdr = [](const char* testStr, FILE* file)
+            {
+                char buf[16];
+
+                size_t len = strlen(testStr);
+                fseek(file, 0, 0);
+                fread_s(buf, len, 1, len, file);
+                return strncmp(testStr, buf, len) == 0;
+            };
+
+            if (CheckHdr(test1, f) || CheckHdr(test2, f))
+            {
+                res = true;
+            }
+            fclose(f);
+        }
+        return res;
+    }
 }
