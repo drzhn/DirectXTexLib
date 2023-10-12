@@ -27,6 +27,7 @@
 *.res
 *.exe
 *.aps
+*.pch
 .vs
 [Bb]in
 packages
