@@ -312,7 +312,7 @@
       <ConformanceMode>true</ConformanceMode>
       <ExternalWarningLevel>Level4</ExternalWarningLevel>
       <GuardEHContMetadata>true</GuardEHContMetadata>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -395,6 +395,7 @@
       <ConformanceMode>true</ConformanceMode>
       <ExternalWarningLevel>Level4</ExternalWarningLevel>
       <GuardEHContMetadata>true</GuardEHContMetadata>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
