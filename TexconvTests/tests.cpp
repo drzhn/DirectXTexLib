@@ -13,7 +13,7 @@ int main()
         (1ull << OPT_FIT_POWEROF2) |
         (1ull << OPT_USE_DX10);
 
-    int result = AssetConversion::TextureConversionInit();
+    int result = AssetConversion::TextureConversionInit(false);
 
     {
         params.format = DXGI_FORMAT_BC1_UNORM;
