@@ -1032,9 +1032,9 @@ namespace
 
         D3D_FEATURE_LEVEL fl;
         HRESULT hr = D3D11CreateDevice(pAdapter.Get(),
-                                                (pAdapter) ? D3D_DRIVER_TYPE_UNKNOWN : D3D_DRIVER_TYPE_HARDWARE,
-                                                nullptr, createDeviceFlags, featureLevels, static_cast<UINT>(std::size(featureLevels)),
-                                                D3D11_SDK_VERSION, pDevice, &fl, nullptr);
+                                       (pAdapter) ? D3D_DRIVER_TYPE_UNKNOWN : D3D_DRIVER_TYPE_HARDWARE,
+                                       nullptr, createDeviceFlags, featureLevels, static_cast<UINT>(std::size(featureLevels)),
+                                       D3D11_SDK_VERSION, pDevice, &fl, nullptr);
         if (SUCCEEDED(hr))
         {
             if (fl < D3D_FEATURE_LEVEL_11_0)
@@ -1318,29 +1318,19 @@ namespace AssetConversion
     ComPtr<ID3D11Device> pDevice;
     int adapter = -1;
 
-    int TextureConversionInit(bool initializeCOM, bool createDevice, DWORD dwCoInit)
+    int TextureConversionInit(DWORD dwCoInit)
     {
-        // Set locale for output since GetErrorDesc can get localized strings.
-        std::locale::global(std::locale(""));
-
-        if (initializeCOM)
+        // Initialize COM (needed for WIC)
+        HRESULT hr = CoInitializeEx(nullptr, dwCoInit);
+        if (FAILED(hr))
         {
-            // Initialize COM (needed for WIC)
-            HRESULT hr = CoInitializeEx(nullptr, dwCoInit);
-            if (FAILED(hr))
-            {
-                wprintf(L"Failed to initialize COM (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-                return 1;
-            }
+            wprintf(L"Failed to initialize COM (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
+            return 1;
         }
-
-        if (createDevice)
+        if (!CreateDevice(adapter, pDevice.GetAddressOf()))
         {
-            if (!CreateDevice(adapter, pDevice.GetAddressOf()))
-            {
-                wprintf(L"\nWARNING: DirectCompute is not available, using BC6H / BC7 CPU codec\n");
-                return 57;
-            }
+            wprintf(L"\nWARNING: DirectCompute is not available, using BC6H / BC7 CPU codec\n");
+            return 57;
         }
 
         return 0;

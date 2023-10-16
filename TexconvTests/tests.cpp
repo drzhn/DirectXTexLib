@@ -15,7 +15,7 @@ int main()
         (1ull << OPT_FIT_POWEROF2) |
         (1ull << OPT_USE_DX10);
 
-    int result = AssetConversion::TextureConversionInit(true, true, COINIT_MULTITHREADED);
+    int result = AssetConversion::TextureConversionInit(COINIT_MULTITHREADED);
 
     {
         params.format = DXGI_FORMAT_BC1_UNORM;
