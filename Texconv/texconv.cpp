@@ -1318,7 +1318,7 @@ namespace AssetConversion
     ComPtr<ID3D11Device> pDevice;
     int adapter = -1;
 
-    int TextureConversionInit(bool initializeCOM, DWORD dwCoInit)
+    int TextureConversionInit(bool initializeCOM, bool createDevice, DWORD dwCoInit)
     {
         // Set locale for output since GetErrorDesc can get localized strings.
         std::locale::global(std::locale(""));
@@ -1334,6 +1334,7 @@ namespace AssetConversion
             }
         }
 
+        if (createDevice)
         {
             if (!CreateDevice(adapter, pDevice.GetAddressOf()))
             {
