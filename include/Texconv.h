@@ -91,7 +91,7 @@ namespace AssetConversion
         DXGI_FORMAT format = DXGI_FORMAT_UNKNOWN;
     };
 
-    int TextureConversionInit(bool initializazeCom);
+    int TextureConversionInit();
 
     int Convert(
         const TextureConversionParams& params,

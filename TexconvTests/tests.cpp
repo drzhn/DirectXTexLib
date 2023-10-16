@@ -13,7 +13,7 @@ int main()
         (1ull << OPT_FIT_POWEROF2) |
         (1ull << OPT_USE_DX10);
 
-    int result = AssetConversion::TextureConversionInit(false);
+    int result = AssetConversion::TextureConversionInit();
 
     {
         params.format = DXGI_FORMAT_BC1_UNORM;
@@ -21,8 +21,8 @@ int main()
         AssetConversion::TextureMetadata metadata;
         Blob blob;
 
-        result = AssetConversion::Convert(params, options, R"(D:\CppProjects\JoyEngineDX\JoyData\textures\background.tga)", metadata, blob);
-        //bool isHDR = AssetConversion::IsHDR("pngTexture.png");
+        result = AssetConversion::Convert(params, options, "pngTexture.png", metadata, blob);
+        bool isHDR = AssetConversion::IsHDR("pngTexture.png");
         std::ofstream fout;
         fout.open("pngTexture.dds", std::ios::binary | std::ios::out);
 
