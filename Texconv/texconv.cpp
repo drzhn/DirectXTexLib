@@ -818,22 +818,7 @@ namespace
 
         *pFactory = nullptr;
 
-        typedef HRESULT (WINAPI*pfn_CreateDXGIFactory1)(REFIID riid, _Out_ void** ppFactory);
-
-        static pfn_CreateDXGIFactory1 s_CreateDXGIFactory1 = nullptr;
-
-        if (!s_CreateDXGIFactory1)
-        {
-            HMODULE hModDXGI = LoadLibraryW(L"dxgi.dll");
-            if (!hModDXGI)
-                return false;
-
-            s_CreateDXGIFactory1 = reinterpret_cast<pfn_CreateDXGIFactory1>(reinterpret_cast<void*>(GetProcAddress(hModDXGI, "CreateDXGIFactory1")));
-            if (!s_CreateDXGIFactory1)
-                return false;
-        }
-
-        return SUCCEEDED(s_CreateDXGIFactory1(IID_PPV_ARGS(pFactory)));
+        return SUCCEEDED(CreateDXGIFactory1(IID_PPV_ARGS(pFactory)));
     }
 
     void PrintUsage()
@@ -1006,18 +991,18 @@ namespace
 
         *pDevice = nullptr;
 
-        static PFN_D3D11_CREATE_DEVICE s_DynamicD3D11CreateDevice = nullptr;
+        //static PFN_D3D11_CREATE_DEVICE s_DynamicD3D11CreateDevice = nullptr;
 
-        if (!s_DynamicD3D11CreateDevice)
-        {
-            HMODULE hModD3D11 = LoadLibraryW(L"d3d11.dll");
-            if (!hModD3D11)
-                return false;
+        //if (!s_DynamicD3D11CreateDevice)
+        //{
+        //    HMODULE hModD3D11 = LoadLibraryW(L"d3d11.dll");
+        //    if (!hModD3D11)
+        //        return false;
 
-            s_DynamicD3D11CreateDevice = reinterpret_cast<PFN_D3D11_CREATE_DEVICE>(reinterpret_cast<void*>(GetProcAddress(hModD3D11, "D3D11CreateDevice")));
-            if (!s_DynamicD3D11CreateDevice)
-                return false;
-        }
+        //    s_DynamicD3D11CreateDevice = reinterpret_cast<PFN_D3D11_CREATE_DEVICE>(reinterpret_cast<void*>(GetProcAddress(hModD3D11, "D3D11CreateDevice")));
+        //    if (!s_DynamicD3D11CreateDevice)
+        //        return false;
+        //}
 
         const D3D_FEATURE_LEVEL featureLevels[] =
         {
@@ -1046,7 +1031,7 @@ namespace
         }
 
         D3D_FEATURE_LEVEL fl;
-        HRESULT hr = s_DynamicD3D11CreateDevice(pAdapter.Get(),
+        HRESULT hr = D3D11CreateDevice(pAdapter.Get(),
                                                 (pAdapter) ? D3D_DRIVER_TYPE_UNKNOWN : D3D_DRIVER_TYPE_HARDWARE,
                                                 nullptr, createDeviceFlags, featureLevels, static_cast<UINT>(std::size(featureLevels)),
                                                 D3D11_SDK_VERSION, pDevice, &fl, nullptr);

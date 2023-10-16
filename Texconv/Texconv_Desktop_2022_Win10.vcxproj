@@ -237,7 +237,7 @@
       <EnableDPIAwareness>false</EnableDPIAwareness>
     </Manifest>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)DirectXTex\Bin\$(Platform)\$(Configuration)\DirectXTex.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)DirectXTex\Bin\$(Platform)\$(Configuration)\DirectXTex.lib;d3d11.lib;dxgi.lib;version.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -321,7 +321,7 @@
       <EnableDPIAwareness>false</EnableDPIAwareness>
     </Manifest>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)DirectXTex\Bin\$(Platform)\$(Configuration)\DirectXTex.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)DirectXTex\Bin\$(Platform)\$(Configuration)\DirectXTex.lib;d3d11.lib;dxgi.lib;version.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -407,7 +407,7 @@
       <EnableDPIAwareness>false</EnableDPIAwareness>
     </Manifest>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)DirectXTex\Bin\$(Platform)\$(Configuration)\DirectXTex.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)DirectXTex\Bin\$(Platform)\$(Configuration)\DirectXTex.lib;d3d11.lib;dxgi.lib;version.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|ARM64'">
