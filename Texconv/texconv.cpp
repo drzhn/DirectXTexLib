@@ -1333,17 +1333,20 @@ namespace AssetConversion
     ComPtr<ID3D11Device> pDevice;
     int adapter = -1;
 
-    int TextureConversionInit()
+    int TextureConversionInit(bool initializeCOM, DWORD dwCoInit)
     {
         // Set locale for output since GetErrorDesc can get localized strings.
         std::locale::global(std::locale(""));
 
-        // Initialize COM (needed for WIC)
-        HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-        if (FAILED(hr))
+        if (initializeCOM)
         {
-            wprintf(L"Failed to initialize COM (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
-            return 1;
+            // Initialize COM (needed for WIC)
+            HRESULT hr = CoInitializeEx(nullptr, dwCoInit);
+            if (FAILED(hr))
+            {
+                wprintf(L"Failed to initialize COM (%08X%ls)\n", static_cast<unsigned int>(hr), GetErrorDesc(hr));
+                return 1;
+            }
         }
 
         {

@@ -3,6 +3,8 @@
 
 #include <fstream>
 
+#include "../DirectXTex/DirectXTex.h"
+
 int main()
 {
     AssetConversion::TextureConversionParams params;
@@ -13,7 +15,7 @@ int main()
         (1ull << OPT_FIT_POWEROF2) |
         (1ull << OPT_USE_DX10);
 
-    int result = AssetConversion::TextureConversionInit();
+    int result = AssetConversion::TextureConversionInit(true, COINIT_MULTITHREADED);
 
     {
         params.format = DXGI_FORMAT_BC1_UNORM;

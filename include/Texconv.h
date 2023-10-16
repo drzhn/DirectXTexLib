@@ -3,6 +3,7 @@
 
 #include <dxgiformat.h>
 #include <cstdint>
+#include <intsafe.h>
 
 class Blob;
 
@@ -91,7 +92,7 @@ namespace AssetConversion
         DXGI_FORMAT format = DXGI_FORMAT_UNKNOWN;
     };
 
-    int TextureConversionInit();
+    int TextureConversionInit(bool initializeCOM, DWORD dwCoInit);
 
     int Convert(
         const TextureConversionParams& params,
